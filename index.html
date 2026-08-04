@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-</head>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+
 <body>
 
   <!-- INTRO OVERLAY -->
@@ -62,21 +62,8 @@
     </div>
   </nav>
 
-  <!-- SECTION 01 — SHOWCASE (3D Carousel) -->
-  <section id="home" class="section-showcase">
-    <div class="showcase-label reveal-up">
-      <span>01 — Some of our latest work</span>
-    </div>
-    <div class="carousel-wrapper" id="carouselWrapper">
-      <div class="carousel-scene" id="carouselScene"></div>
-    </div>
-    <div class="scroll-hint reveal-up">
-      <span data-i18n="scroll_hint">Scroll to explore</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-    </div>
-  </section>
-
   <!-- HERO — WE LEAD THE FEED -->
+  
   <section id="hero" class="section-hero">
     <div class="hero-inner">
       <h1 class="hero-title reveal-up">
@@ -88,6 +75,20 @@
         <a href="#contact"   class="btn-primary" data-i18n="hero_cta1">Start Your Journey</a>
         <a href="#portfolio" class="btn-ghost"   data-i18n="hero_cta2">See Our Portfolio</a>
       </div>
+    </div>
+  </section>
+  
+<!-- SECTION 01 — SHOWCASE (3D Carousel) -->
+  <section id="home" class="section-showcase">
+    <div class="showcase-label reveal-up" data-i18n="showcase_label">
+      <span>01 — Some of our latest work</span>
+    </div>
+    <div class="carousel-wrapper" id="carouselWrapper">
+      <div class="carousel-scene" id="carouselScene"></div>
+    </div>
+    <div class="scroll-hint reveal-up">
+      <span data-i18n="scroll_hint">Scroll to explore</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
     </div>
   </section>
 
@@ -248,7 +249,7 @@
         </div>
         <div class="about-right">
           <div class="about-visual reveal-up">
-            <video src="assets\gg.mp4" autoplay loop playsinline alt="" aria-hidden="true" class="about-gif" />
+            <img src="assets\sehsucht.gif" aria-hidden="true" class="about-gif" />
           </div>
           <div class="pillars-grid reveal-up">
             <div class="pillar"><span class="pillar-num">01</span><span data-i18n="p1">Creative Excellence</span></div>
