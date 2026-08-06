@@ -10,7 +10,7 @@
   --fg-dark:        #F5F1EB;
   --fg-dark-muted:  rgba(245,241,235,0.5);
   --cream-bg:       #F5F1EB;
-  --cream-2:        #EDE9E2;
+  --cream-2:        rgb(237, 233, 226);
   --cream-border:   rgba(26,20,16,0.1);
   --fg-light:       #1A1410;
   --fg-light-muted: rgba(26,20,16,0.52);
@@ -22,22 +22,7 @@
   --text-cream-sec: #1A1410;
 }
 
-[data-theme="light"] {
-  --bg-dark-sec:    #EFEBFA;
-  --bg-cream-sec:   #FFFFFF;
-  --text-dark-sec:  #14121B;
-  --text-cream-sec: #14121B;
-  --dark-border:    rgba(20,18,27,0.1);
-  --dark-border-h:  rgba(20,18,27,0.25);
-  --fg-dark:        #14121B;
-  --fg-dark-muted:  rgba(20,18,27,0.52);
-  --dark-bg:        #EFEBFA;
-  --dark-surface:   #F6F4FC;
-  --dark-surface-2: #EDE8FB;
-  --cream-bg:       #FFFFFF;
-  --cream-2:        #F6F3FE;
-  --fg-light:       #14121B;
-}
+
 
 /* ============================================
    RESET
@@ -120,17 +105,22 @@ h1, h2, h3, h4 {
   position: fixed; inset: 0 0 auto 0; z-index: 500;
   padding: 1.1rem 2rem;
   transition: background 0.4s, box-shadow 0.4s;
+
 }
+
 .nav.scrolled {
-  background: rgba(0, 0, 0, 0.16);
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px);
+  background: linear-gradient(
+    to bottom,
+    #242431c2 00%,   /* stays solid black for most of the section */
+    #f5f1eb00 100%   /* fades to white right at the bottom */
+  );
+  backdrop-filter: blur(500px); 
+  -webkit-backdrop-filter: blur(500px);
+  mask-image: linear-gradient(to bottom, #242431c2, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #242431c2, transparent);
 }
-[data-theme="light"] 
-.nav.scrolled {
-  background: rgba(239, 235, 250, 0.389);
-  
-}
+
+
 
 .nav-inner {
   max-width: 1280px; margin: auto;
@@ -145,7 +135,6 @@ h1, h2, h3, h4 {
   transition: filter 0.35s;
   justify-self: start;
 }
-[data-theme="light"] .nav-logo-img { filter: none; }
 
 .nav-links { display: none; align-items: center; gap: 1.75rem; }
 @media (min-width: 900px) { .nav-links { display: flex; } }
@@ -466,6 +455,15 @@ h1, h2, h3, h4 {
 /* ============================================
    PORTFOLIO
 ============================================ */
+.section-portfolio{
+  background:
+   linear-gradient(
+    to bottom,
+    #F5F1EB 0%,
+    #F5F1EB 90%,   /* stays solid black for most of the section */
+    #000000 100%   /* fades to white right at the bottom */
+  );
+}
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
@@ -511,8 +509,9 @@ h1, h2, h3, h4 {
 /* ============================================
    ABOUT
 ============================================ */
-.about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
-@media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; } }
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem;
+} 
+@media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; }  }
 .about-body { font-size: 1.05rem; line-height: 1.8; color: var(--fg-dark-muted); margin-bottom: 2rem; }
 .about-quote {
   font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 500;
@@ -579,6 +578,14 @@ h1, h2, h3, h4 {
 /* ============================================
    CONTACT
 ============================================ */
+.section-about {
+    background: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #000000 90%,   /* stays solid black for most of the section */
+    #F5F1EB 100%   /* fades to white right at the bottom */
+  );    
+}
 .contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
 @media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1.3fr; align-items: start; gap: 5rem; } }
 .contact-sub { font-size: 1rem; color: var(--fg-light-muted); line-height: 1.7; margin: 0.75rem 0 2rem; }
