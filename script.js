@@ -18,8 +18,8 @@ const LANG = {
     nav_cta:       'Contact',
     scroll_hint:   'Scroll to explore',
     hero_badge:    'Digital Marketing Agency',
-    hero_t1:       'We Lead',
-    hero_t2:       'The Feed',
+    hero_t1:       'WE LEAD',
+    hero_t2:       'THE FEED',
     hero_sub:      'Creative digital agency based in Morocco. We design, build, and film for brands that want to stand out.',
     hero_cta1:     'Start Your Journey',
     hero_cta2:     'See Our Portfolio',
@@ -101,8 +101,8 @@ const LANG = {
     nav_cta:       'Contact',
     scroll_hint:   'Défiler pour explorer',
     hero_badge:    'Agence de Marketing Digital',
-    hero_t1:       'Nous Menons',
-    hero_t2:       'Le Feed',
+    hero_t1:       'NOUS MENONS',
+    hero_t2:       'LE FEED',
     hero_sub:      'Agence créative basée au Maroc. Nous concevons, développons et filmons pour les marques qui veulent se démarquer.',
     hero_cta1:     'Commencer',
     hero_cta2:     'Voir Notre Portfolio',
@@ -334,7 +334,15 @@ function applyTheme(theme) {
   localStorage.setItem('dzn_theme', theme);
   document.documentElement.setAttribute('data-theme', theme);
 }
-
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('mainNav');
+  
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
 /* ============================================
    INTRO OVERLAY
 ============================================ */

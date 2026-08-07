@@ -3,6 +3,26 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta
+http-equiv="Content-Security-Policy"
+content="
+default-src 'self';
+img-src 'self' https: data:;
+media-src 'self';
+style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+font-src 'self' https://fonts.gstatic.com;
+script-src 'self' 'unsafe-inline';
+connect-src
+    'self'
+    https://digitalzn-production.up.railway.app
+    https://www.digital-zn.com
+    https://digital-zn.com
+    http://localhost:3000
+    http://127.0.0.1:3000;
+frame-ancestors 'none';
+base-uri 'self';
+form-action 'self';
+">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital ZN — Digital Marketing Agency</title>
   <meta name="description"
@@ -13,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+ 
 
 <body>
 
@@ -68,8 +88,8 @@
   <section id="hero" class="section-hero">
     <div class="hero-inner">
       <h1 class="hero-title reveal-up">
-        <span data-i18n="hero_t1">We Lead</span>
-        <em data-i18n="hero_t2">The Feed</em>
+        <span data-i18n="hero_t1">WE LEAD</span>
+        <em data-i18n="hero_t2">THE FEED</em>
       </h1>
       <p class="hero-sub reveal-up" data-i18n="hero_sub">Creative digital agency based in Morocco. We design, build, and
         film for brands that want to stand out.</p>

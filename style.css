@@ -2,7 +2,7 @@
    CSS CUSTOM PROPERTIES — THEME TOKENS
 ============================================ */
 :root {
-  --dark-bg:        #0C0C0C;
+  --dark-bg:        #0e0d1a;
   --dark-surface:   #111111;
   --dark-surface-2: #1A1A1A;
   --dark-border:    rgba(245,241,235,0.08);
@@ -16,10 +16,11 @@
   --fg-light-muted: rgba(26,20,16,0.52);
   --purple:         #5B4FE8;
   --purple-light:   #7B6FF0;
-  --bg-dark-sec:    #0C0C0C;
+  --bg-dark-sec:    #080813;
   --bg-cream-sec:   #F5F1EB;
   --text-dark-sec:  #F5F1EB;
   --text-cream-sec: #1A1410;
+  --font-heading: 'Jost', sans-serif;
 }
 
 
@@ -27,6 +28,7 @@
 /* ============================================
    RESET
 ============================================ */
+* { box-sizing: border-box; } 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 img, video { max-width: 100%; display: block; }
@@ -34,7 +36,7 @@ a { text-decoration: none; color: inherit; }
 button { font-family: inherit; cursor: pointer; }
 
 body {
-  font-family: "Sora", sans-serif;
+  font-family: 'Jost', sans-serif;
   background: var(--bg-dark-sec);
   color: var(--fg-dark);
   overflow-x: hidden;
@@ -42,9 +44,9 @@ body {
   transition: background 0.45s, color 0.45s;
 }
 h1, h2, h3, h4 {
-  font-family: "Sora", sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.03em;
+  font-family: 'Jost', sans-serif;
+  font-weight: 800;   /* Jost's heaviest weight, closest to "Heavy" */
+  letter-spacing: -0.01em;
 }
 
 /* RTL support */
@@ -102,28 +104,38 @@ h1, h2, h3, h4 {
 ============================================ */
 
 .nav {
-  position: fixed; inset: 0 0 auto 0; z-index: 500;
-  padding: 1.1rem 2rem;
-  transition: background 0.4s, box-shadow 0.4s;
-
+  position: fixed; inset: 0 0 auto 0; z-index: 500;   /* was 2 — too low */
+  width: 100%;                 /* explicit safeguard */
+  padding: clamp(0.9rem, 2vw, 1.7rem) clamp(1.25rem, 5vw, 5rem);
 }
 
-.nav.scrolled {
+/* Background layer only — blur, gradient, and mask live here,
+   completely separate from the nav's actual content */
+.nav::before {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;   /* the smooth blur "appearance" you asked for */
   background: linear-gradient(
     to bottom,
-    #242431c2 00%,   /* stays solid black for most of the section */
-    #f5f1eb00 100%   /* fades to white right at the bottom */
+    #242431c2 60%,   /* stays solid for most of the section */
+    #f5f1eb00 100%   /* fades to transparent at the bottom */
   );
-  backdrop-filter: blur(500px); 
-  -webkit-backdrop-filter: blur(500px);
-  mask-image: linear-gradient(to bottom, #242431c2, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, #242431c2, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  mask-image: linear-gradient(to bottom, #242431, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #242431, transparent);
 }
 
-
+.nav.scrolled::before {
+  opacity: 1;   /* fades the whole blurred background in smoothly on scroll */
+}
 
 .nav-inner {
-  max-width: 1280px; margin: auto;
+  position: relative; z-index: 1;   /* sits above ::before, never masked */
+  max-width: 1300px; margin: auto;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -273,6 +285,12 @@ h1, h2, h3, h4 {
   min-height: 100vh; background: var(--bg-dark-sec);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding-top: 5rem; position: relative; overflow: hidden;
+      background: linear-gradient(
+    to bottom,
+    #080813 0%,
+    #080813 60%,   /* stays solid black for most of the section */
+    #F5F1EB 100%   /* fades to white right at the bottom */
+  );   
 }
 .showcase-label {
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
@@ -343,7 +361,7 @@ h1, h2, h3, h4 {
 .scroll-hint {
   display: flex; align-items: center; gap: 0.5rem;
   font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--fg-dark-muted); margin-top: 3rem; margin-bottom: 1.5rem;
+  color: var(--bg-dark-sec); margin-top: 3rem; margin-bottom: 1.5rem;
 }
 .scroll-hint svg { width: 1rem; height: 1rem; animation: bounceDown 1.8s ease-in-out infinite; }
 @keyframes bounceDown {
@@ -365,12 +383,12 @@ h1, h2, h3, h4 {
   padding: 0.35rem 1rem; margin-bottom: 1.75rem;
 }
 .hero-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Jost', sans-serif;
   font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 600;
   line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem;
   color: var(--text-dark-sec);
 }
-.hero-title em { font-style: italic; display: block; color: var(--purple-light); }
+.hero-title em {display: block; color: var(--purple-light); }
 .hero-sub {
   font-size: 1.1rem; color: var(--fg-dark-muted); line-height: 1.75;
   max-width: 36rem; margin: 0 auto 2.5rem;
@@ -459,10 +477,10 @@ h1, h2, h3, h4 {
   background:
    linear-gradient(
     to bottom,
-    #F5F1EB 0%,
-    #F5F1EB 90%,   /* stays solid black for most of the section */
-    #000000 100%   /* fades to white right at the bottom */
+    #F5F1EB 83%,   /* stays solid black for most of the section */
+    #080813 100%   /* fades to white right at the bottom */
   );
+  padding-bottom:50px ;
 }
 .portfolio-grid {
   display: grid;
@@ -509,10 +527,15 @@ h1, h2, h3, h4 {
 /* ============================================
    ABOUT
 ============================================ */
+.section-about{margin-bottom:-150px;    background: linear-gradient(
+    to bottom,
+    #080813 85%,   /* stays solid black for most of the section */
+    #F5F1EB 100%   /* fades to white right at the bottom */
+  );   }
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem;
 } 
 @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; }  }
-.about-body { font-size: 1.05rem; line-height: 1.8; color: var(--fg-dark-muted); margin-bottom: 2rem; }
+.about-body { font-size: 1.05rem; line-height: 1.8; color: var(--fg-dark-muted); margin-bottom: 0.5rem; }
 .about-quote {
   font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 500;
   color: var(--fg-dark); line-height: 1.5;
@@ -524,21 +547,22 @@ h1, h2, h3, h4 {
 }
 .about-gif { width: 100%; height: 100%; object-fit: fill; }
 
-.team-slider{
-    width:100%;
-    overflow:hidden;
-    padding:40px 0;
+.team-slider {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+  padding: 0px 0;
+  margin-top: -100px;
+  
 }
 
 .slider-track{
-    display:flex;
-    gap:30px;
-    width:max-content;
-    position: absolute;  /* Removes it from normal document flow */
-    top: 99cm;           /* Distance from the top of the parent container */
-    z-index: 100;         /* Ensures it stacks on top of the base section */
-    padding: 20px;
-    animation: scroll 50s linear infinite;
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  padding: 20px;
+  animation: scroll 50s linear infinite;
 }
 
 .card{
@@ -578,14 +602,11 @@ h1, h2, h3, h4 {
 /* ============================================
    CONTACT
 ============================================ */
-.section-about {
-    background: linear-gradient(
-    to bottom,
-    #000000 0%,
-    #000000 90%,   /* stays solid black for most of the section */
-    #F5F1EB 100%   /* fades to white right at the bottom */
-  );    
-}
+.section-contact{background: linear-gradient(
+    to top,
+    #F5F1EB 85%,   /* stays solid black for most of the section */
+    #ded9d2 100%   /* fades to white right at the bottom */
+  ); }
 .contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
 @media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1.3fr; align-items: start; gap: 5rem; } }
 .contact-sub { font-size: 1rem; color: var(--fg-light-muted); line-height: 1.7; margin: 0.75rem 0 2rem; }
