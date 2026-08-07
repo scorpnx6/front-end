@@ -33,8 +33,8 @@ form-action 'self';
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <script src="script.js" defer></script>
-
+ 
+</head>
 <body>
 
   <!-- INTRO OVERLAY -->
@@ -72,13 +72,11 @@ form-action 'self';
       </div>
     </div>
     <div class="mobile-menu" id="mobileMenu">
-      <div class="mobile-menu-inner">
-        <a href="#home" data-i18n="nav_home" class="mobile-link">Home</a>
-        <a href="#services" data-i18n="nav_services" class="mobile-link">Services</a>
-        <a href="#portfolio" data-i18n="nav_portfolio" class="mobile-link">Portfolio</a>
-        <a href="#about" data-i18n="nav_about" class="mobile-link">About</a>
-        <a href="#contact" data-i18n="nav_cta" class="mobile-link mobile-link--cta">Contact</a>
-      </div>
+      <a href="#home" data-i18n="nav_home" class="mobile-link">Home</a>
+      <a href="#services" data-i18n="nav_services" class="mobile-link">Services</a>
+      <a href="#portfolio" data-i18n="nav_portfolio" class="mobile-link">Portfolio</a>
+      <a href="#about" data-i18n="nav_about" class="mobile-link">About</a>
+      <a href="#contact" data-i18n="nav_cta" class="mobile-link mobile-link--cta">Contact</a>
     </div>
   </nav>
 
@@ -256,11 +254,12 @@ form-action 'self';
           <blockquote class="about-quote reveal-up" data-i18n="ab_quote">"Our vision is simple: to lead the feed
             wherever our clients are present."</blockquote>
         </div>
+        
         <div class="about-right">
           <div class="about-visual reveal-up">
             <img src="assets\sehsucht.gif" aria-hidden="false" class="about-gif" />
           </div>
-    </section>
+  </section>
       <div class="slider-track">
 
       <!-- Original Cards -->
@@ -476,6 +475,8 @@ form-action 'self';
       </div>
     </div>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 
 </html>

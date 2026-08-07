@@ -455,12 +455,6 @@ function normalizeAngle(angle) {
   return ((angle + 180) % 360 + 360) % 360 - 180;
 }
 
-// Caps how many 3D-transformed cards iOS has to composite at once —
-// fewer overlapping preserve-3d layers means less chance of the
-// color-corruption glitch, even with the lowered mobile perspective.
-const IS_TOUCH_DEVICE = window.matchMedia('(pointer: coarse)').matches
-                      || window.innerWidth < 768;
-
 function positionCircularCards() {
   const wrappers = document.querySelectorAll('.card-wrapper');
   const total = CARDS.length;
@@ -481,7 +475,6 @@ function positionCircularCards() {
 
   wrappers.forEach((wrapper, i) => {
     const angle = i * step + carouselAngle;
-    const normalized = normalizeAngle(angle);
     const depth = Math.cos(angle * Math.PI / 180);
     const opacity = 0.28 + Math.max(depth, 0) * 0.72;
     const scale = 0.78 + Math.max(depth, 0) * 0.22;
@@ -491,11 +484,6 @@ function positionCircularCards() {
     wrapper.style.opacity = opacity.toFixed(3);
     wrapper.style.transform =
       `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px) scale(${scale})`;
-
-    // On mobile, fully skip compositing cards facing well away from
-    // the front — caps simultaneous 3D layers and avoids the iOS glitch.
-    wrapper.style.visibility = (IS_TOUCH_DEVICE && Math.abs(normalized) > 100)
-      ? 'hidden' : 'visible';
   });
 }
 

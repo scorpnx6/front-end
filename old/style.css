@@ -104,23 +104,24 @@ h1, h2, h3, h4 {
 ============================================ */
 
 .nav {
-  position: fixed; inset: 0 0 auto 0; z-index: 500;  
-  width: 100%;                
+  position: fixed; inset: 0 0 auto 0; z-index: 500;   /* was 2 — too low */
+  width: 100%;                 /* explicit safeguard */
   padding: clamp(0.9rem, 2vw, 1.7rem) clamp(1.25rem, 5vw, 5rem);
 }
 
-
+/* Background layer only — blur, gradient, and mask live here,
+   completely separate from the nav's actual content */
 .nav::before {
   content: '';
   position: absolute; inset: 0;
   z-index: -1;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;   
+  transition: opacity 0.5s ease-in-out;   /* the smooth blur "appearance" you asked for */
   background: linear-gradient(
     to bottom,
-    #242431c2 60%,  
-    #f5f1eb00 100%   
+    #242431c2 60%,   /* stays solid for most of the section */
+    #f5f1eb00 100%   /* fades to transparent at the bottom */
   );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -129,7 +130,7 @@ h1, h2, h3, h4 {
 }
 
 .nav.scrolled::before {
-  opacity: 1;  
+  opacity: 1;   /* fades the whole blurred background in smoothly on scroll */
 }
 
 .nav-inner {
@@ -200,10 +201,9 @@ h1, h2, h3, h4 {
 
 .nav-cta {
   display: none; align-items: center;
-  background: var(--purple); color: #fff; border-radius: 50px;
+  background: var(--purple); color: #fff; border-radius: 100px;
   padding: 0.52rem 1.2rem; font-size: 0.8rem; font-weight: 600;
   letter-spacing: 0.02em; transition: background 0.2s, transform 0.2s;
-
 }
 .nav-cta:hover { background: var(--purple-light); transform: translateY(-1px); }
 @media (min-width: 900px) { .nav-cta { display: inline-flex; } }
@@ -218,25 +218,14 @@ h1, h2, h3, h4 {
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Grid 0fr → 1fr trick instead of max-height: iOS Safari is known to
-   silently fail to repaint max-height transitions on flex containers,
-   which is why the menu wasn't appearing on phones. Grid row sizing
-   doesn't have that bug and animates reliably everywhere. */
 .mobile-menu {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s ease, border-color 0.4s;
+  max-height: 0; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: max-height 0.4s ease, border-color 0.4s;
   background: var(--dark-bg);
-  border-top: 1px solid transparent;
 }
 .mobile-menu.open {
-  grid-template-rows: 1fr;
   border-top-color: var(--dark-border); /* only shows when opened */
-}
-.mobile-menu-inner {
-  overflow: hidden;          /* required for the grid-rows trick to clip content */
-  display: flex; flex-direction: column;
-  min-height: 0;
 }
 [data-theme="light"] .mobile-menu { background: var(--cream-bg); border-color: var(--cream-border); }
 .mobile-link {
@@ -293,12 +282,12 @@ h1, h2, h3, h4 {
    SECTION 01 — SHOWCASE (3D Carousel)
 ============================================ */
 .section-showcase {
-  min-height: 100vh; 
+  min-height: 100vh; background: var(--bg-dark-sec);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding-top: 5rem; position: relative; overflow: hidden;
       background: linear-gradient(
     to bottom,
-   
+    #080813 0%,
     #080813 60%,   /* stays solid black for most of the section */
     #F5F1EB 100%   /* fades to white right at the bottom */
   );   
@@ -318,14 +307,6 @@ h1, h2, h3, h4 {
   cursor: grab;
   touch-action: pan-y;
 }
-/* iOS Safari's compositor corrupts colors when too many large,
-   overlapping preserve-3d layers sit under a very high perspective —
-   that's the red/purple banding you saw. Dropping perspective sharply
-   on small screens keeps the same visual tilt at a scale iOS composites
-   correctly. */
-@media (max-width: 767px) {
-  .carousel-wrapper { perspective: 500cm; }
-}
 .carousel-wrapper.is-dragging {
   cursor: grabbing;
 }
@@ -343,8 +324,6 @@ h1, h2, h3, h4 {
   aspect-ratio: 11 / 10;
   transform-style: preserve-3d;
   transform-origin: center center;
-  backface-visibility: hidden;      /* stops iOS from compositing hidden backfaces */
-  -webkit-backface-visibility: hidden;
   transition:
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.5s ease;
@@ -354,8 +333,7 @@ h1, h2, h3, h4 {
   height: 100%;
   overflow: hidden;
   border-radius: 26px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+
 }
 @media (min-width: 640px)  { .card-inner { width: 340px; } }
 @media (min-width: 1024px) { .card-inner { width: 460px; } }
@@ -460,6 +438,9 @@ h1, h2, h3, h4 {
 /* ============================================
    SERVICES
 ============================================ */
+.section-inner{
+  padding:80px;
+}
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
