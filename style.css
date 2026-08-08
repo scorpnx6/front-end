@@ -140,6 +140,13 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 20px;
 }
+/* Explicit column placement: without this, hiding .nav-links below 900px
+   (display:none) removes it from the grid item list, so auto-placement
+   shoves .nav-controls into the empty middle track instead of the right
+   one — the controls drift toward center instead of staying flush right. */
+.nav-logo    { grid-column: 1; }
+.nav-links   { grid-column: 2; }
+.nav-controls{ grid-column: 3; }
 .nav-logo-img {
   height: 47px; width: auto; object-fit: contain;
   filter: brightness(0) invert(1);
@@ -320,11 +327,17 @@ h1, h2, h3, h4 {
 }
 /* iOS Safari's compositor corrupts colors when too many large,
    overlapping preserve-3d layers sit under a very high perspective —
-   that's the red/purple banding you saw. Dropping perspective sharply
-   on small screens keeps the same visual tilt at a scale iOS composites
-   correctly. */
-@media (max-width: 767px) {
-  .carousel-wrapper { perspective: 500cm; }
+   that's the red/purple banding you saw. Dropping perspective on small
+   screens, in proportion to the smaller carousel radius used there
+   (see getCarouselRadius in script.js), keeps the same visual tilt at a
+   scale iOS composites correctly. (Was mistakenly "500cm" ≈ 18,898px —
+   flatter than the 7000px desktop value, not sharper — which collapsed
+   the whole fan-out into a near-flat stack.)
+   Breakpoint is 899px, not 767px, to match getCarouselRadius()'s own
+   `width < 900` tier — below that the JS radius drops to 390px and the
+   desktop's 7000px perspective is too flat for it. */
+@media (max-width: 899px) {
+  .carousel-wrapper { perspective: 2600px; }
 }
 .carousel-wrapper.is-dragging {
   cursor: grabbing;
@@ -349,6 +362,25 @@ h1, h2, h3, h4 {
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.5s ease;
 }
+/* Card width is kept at ~1.85x smaller than getCarouselRadius()'s current
+   tier — the same radius:card-width ratio the desktop layout uses (850px
+   radius / 460px card, "else" tier below) — so side cards clear the front
+   card by the same proportion at every breakpoint instead of overlapping
+   it. Tiers mirror getCarouselRadius() exactly: <520px (min(78vw,330px)
+   radius), 520-899px (fixed 390px radius), >=900px (fixed 850px radius,
+   the unmodified 460px default below). Previously this was a flat 460px
+   on every screen below 1024px — wider than the phone itself on mobile,
+   and disproportionately wide next to the small tablet-tier radius. */
+@media (max-width: 519px) {
+  .card-wrapper { width: min(42vw, 178px); }
+}
+@media (min-width: 520px) and (max-width: 899px) {
+  .card-wrapper { width: 211px; }
+}
+/* Always fills the wrapper above instead of its own breakpoints, which
+   used to fall out of step with .card-wrapper's width (e.g. a 340px inner
+   image sitting inside a 460px tablet wrapper, left-aligned with an empty
+   gutter down one side). */
 .card-inner {
   width: 100%;
   height: 100%;
@@ -357,8 +389,6 @@ h1, h2, h3, h4 {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-@media (min-width: 640px)  { .card-inner { width: 340px; } }
-@media (min-width: 1024px) { .card-inner { width: 460px; } }
 [data-theme="light"] .card-inner { background: #fff; border-color: rgba(0,0,0,0.08); }
 
 [data-theme="light"] .card-wrapper.is-active .card-inner { border-color: rgba(0,0,0,0.18); }
