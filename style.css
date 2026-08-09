@@ -540,27 +540,9 @@ h1, h2, h3, h4 {
    PORTFOLIO
 ============================================ */
 .section-portfolio{
-  /* Percentage-based stops shift with total section height (card count,
-     breakpoint), so the fade could start well before the "View All
-     Portfolio" button. Anchoring stops to calc(100% - Xpx) instead pins the
-     fade to a fixed-height zone measured up from the section's bottom edge
-     — sized to match the button's own height plus the padding below it —
-     so everything above the button stays flat cream regardless of how tall
-     the cards above make the section, and the eased color-mix (slow-fast-
-     slow, like ease-in-out) keeps the grey midtone a brief waypoint rather
-     than a wide, abrupt band. */
-  background:
-   linear-gradient(
-    to bottom,
-    #F5F1EB 0,
-    #F5F1EB calc(100% - 220px),
-    #E3E0DB calc(100% - 183px),
-    #B8B5B3 calc(100% - 147px),
-    #7F7D7F calc(100% - 110px),
-    #45444B calc(100% - 73px),
-    #1A1923 calc(100% - 37px),
-    #080813 100%
-  );
+  /* Flat cream — no fade into About. Now a clean cut, matching the same
+     treatment on the card band's transition into Contact. */
+  background: #F5F1EB;
   padding-bottom:50px ;
 }
 .portfolio-grid {
