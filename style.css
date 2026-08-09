@@ -472,12 +472,12 @@ h1, h2, h3, h4 {
 .btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); }
 
 .btn-ghost {
-  background: transparent; color: var(--fg-dark);
+  background: var(--dark-surface); color: var(--fg-dark);
   border: 1px solid var(--dark-border-h); border-radius: 100px;
   padding: 0.9rem 2.2rem; font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.95rem; font-weight: 500; transition: all 0.2s; display: inline-block;
+  font-size: 0.95rem; font-weight: 700; transition: all 0.2s; display: inline-block;
 }
-.btn-ghost:hover { background: var(--dark-surface); transform: translateY(-2px); }
+.btn-ghost:hover { background: var(--dark-surface-2); transform: translateY(-2px); }
 [data-theme="light"] .btn-ghost { color: var(--fg-light); border-color: rgba(20,18,27,0.3); }
 [data-theme="light"] .btn-ghost:hover { background: var(--cream-2); }
 
@@ -540,11 +540,26 @@ h1, h2, h3, h4 {
    PORTFOLIO
 ============================================ */
 .section-portfolio{
+  /* Percentage-based stops shift with total section height (card count,
+     breakpoint), so the fade could start well before the "View All
+     Portfolio" button. Anchoring stops to calc(100% - Xpx) instead pins the
+     fade to a fixed-height zone measured up from the section's bottom edge
+     — sized to match the button's own height plus the padding below it —
+     so everything above the button stays flat cream regardless of how tall
+     the cards above make the section, and the eased color-mix (slow-fast-
+     slow, like ease-in-out) keeps the grey midtone a brief waypoint rather
+     than a wide, abrupt band. */
   background:
    linear-gradient(
     to bottom,
-    #F5F1EB 83%,   /* stays solid black for most of the section */
-    #080813 100%   /* fades to white right at the bottom */
+    #F5F1EB 0,
+    #F5F1EB calc(100% - 220px),
+    #E3E0DB calc(100% - 183px),
+    #B8B5B3 calc(100% - 147px),
+    #7F7D7F calc(100% - 110px),
+    #45444B calc(100% - 73px),
+    #1A1923 calc(100% - 37px),
+    #080813 100%
   );
   padding-bottom:50px ;
 }
@@ -593,13 +608,20 @@ h1, h2, h3, h4 {
 /* ============================================
    ABOUT
 ============================================ */
-.section-about{margin-bottom:-150px;    background: linear-gradient(
-    to bottom,
-    #080813 85%,   /* stays solid black for most of the section */
-    #F5F1EB 100%   /* fades to white right at the bottom */
-  );   }
+.section-about{
+  /* Flat dark — the portfolio section above already fades beige-to-black
+     on its own, and the card band below sits on this same background, so
+     About no longer needs its own fade-to-cream (that was bleeding beige
+     through the transparent card band via the negative margins below). */
+  background: #080813;
+}
+/* The shared .section-inner padding (6-8rem top and bottom) reads as dead
+   black space both before the "04 — About" label and again between the
+   purple card and the card band below — the band already adds its own
+   margin on top of this. Trim both sides to a normal, single gap. */
+.section-about .section-inner { padding-top: 3rem; padding-bottom: 2rem; }
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem;
-} 
+}
 @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; }  }
 .about-body { font-size: 1.05rem; line-height: 1.8; color: var(--fg-dark-muted); margin-bottom: 0.5rem; }
 .about-quote {
@@ -614,13 +636,19 @@ h1, h2, h3, h4 {
 .about-gif { width: 100%; height: 100%; object-fit: fill; }
 
 .team-slider {
+  /* Used to sit on a negative margin so the band overlapped into
+     .section-about's old fade-to-cream tail (hiding the seam under the
+     fade). Now that About is flat dark with no fade, the band just flows
+     after the About content on that same dark background — no overlap
+     needed. Flat dark background all the way down, so Contact's cream
+     starts with a clean, immediate cut instead of a gradient. */
   position: relative;
   width: 100%;
   overflow-x: hidden;
   overflow-y: visible;
-  padding: 0px 0;
-  margin-top: -100px;
-  
+  background: var(--bg-dark-sec);
+  padding: 0 0 4rem;
+  margin-top: 1rem;
 }
 
 .slider-track{
