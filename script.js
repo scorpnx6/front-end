@@ -448,7 +448,7 @@ function buildCarousel() {
 
 function getCarouselRadius() {
   const width = window.innerWidth;
-  if (width < 520) return Math.min(width * 0.78, 330);
+  if (width < 768) return Math.min(width * 1.152, 464);
   if (width < 900) return 390;
   return 850;
 }

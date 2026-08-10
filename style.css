@@ -326,6 +326,17 @@ h1, h2, h3, h4 {
   cursor: grab;
   touch-action: pan-y;
 }
+/* The 500px wrapper above is sized for desktop/tablet's much larger cards.
+   On mobile the card is only min(62vw,250px) wide (~227px tall at 11:10),
+   so the fixed 500px box left huge dead space above/below it — read as a
+   big gap under the "01 — Some of our latest work" label and cards that
+   looked tiny. Shrinking the wrapper to track the card's own height lets
+   .section-showcase's existing justify-content:center actually center the
+   label+carousel+hint block in the viewport instead of stranding it under
+   a mostly-empty box. */
+@media (max-width: 767px) {
+  .carousel-wrapper { height: min(68vw, 280px); }
+}
 /* iOS Safari's compositor corrupts colors when too many large,
    overlapping preserve-3d layers sit under a very high perspective —
    that's the red/purple banding you saw. Dropping perspective on small
@@ -367,15 +378,19 @@ h1, h2, h3, h4 {
    tier — the same radius:card-width ratio the desktop layout uses (850px
    radius / 460px card, "else" tier below) — so side cards clear the front
    card by the same proportion at every breakpoint instead of overlapping
-   it. Tiers mirror getCarouselRadius() exactly: <520px (min(78vw,330px)
-   radius), 520-899px (fixed 390px radius), >=900px (fixed 850px radius,
+   it. Tiers mirror getCarouselRadius() exactly: <768px (min(115.2vw,464px)
+   radius), 768-899px (fixed 390px radius), >=900px (fixed 850px radius,
    the unmodified 460px default below). Previously this was a flat 460px
    on every screen below 1024px — wider than the phone itself on mobile,
-   and disproportionately wide next to the small tablet-tier radius. */
-@media (max-width: 519px) {
-  .card-wrapper { width: min(42vw, 178px); }
+   and disproportionately wide next to the small tablet-tier radius. Mobile
+   tier widened from <520 to <768 (and card size raised from min(42vw,178px))
+   so cards fill more of the screen on phones, matching the 767px mobile
+   breakpoint used elsewhere on the site — tablet's own 768-899 tier is
+   unchanged. */
+@media (max-width: 767px) {
+  .card-wrapper { width: min(62vw, 250px); }
 }
-@media (min-width: 520px) and (max-width: 899px) {
+@media (min-width: 768px) and (max-width: 899px) {
   .card-wrapper { width: 211px; }
 }
 /* Always fills the wrapper above instead of its own breakpoints, which
@@ -584,12 +599,9 @@ h1, h2, h3, h4 {
    PORTFOLIO
 ============================================ */
 .section-portfolio{
-  background:
-   linear-gradient(
-    to bottom,
-    #F5F1EB 83%,   /* stays solid black for most of the section */
-    #080813 100%   /* fades to white right at the bottom */
-  );
+  /* Flat cream — no fade into About. Now a clean cut, matching the same
+     treatment on the card band's transition into Contact. */
+  background: #F5F1EB;
   padding-bottom:50px ;
 }
 .portfolio-grid {
@@ -637,13 +649,20 @@ h1, h2, h3, h4 {
 /* ============================================
    ABOUT
 ============================================ */
-.section-about{margin-bottom:-150px;    background: linear-gradient(
-    to bottom,
-    #080813 85%,   /* stays solid black for most of the section */
-    #F5F1EB 100%   /* fades to white right at the bottom */
-  );   }
+.section-about{
+  /* Flat dark — the portfolio section above already fades beige-to-black
+     on its own, and the card band below sits on this same background, so
+     About no longer needs its own fade-to-cream (that was bleeding beige
+     through the transparent card band via the negative margins below). */
+  background: #080813;
+}
+/* The shared .section-inner padding (6-8rem top and bottom) reads as dead
+   black space both before the "04 — About" label and again between the
+   purple card and the card band below — the band already adds its own
+   margin on top of this. Trim both sides to a normal, single gap. */
+.section-about .section-inner { padding-top: 3rem; padding-bottom: 2rem; }
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem;
-} 
+}
 @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; }  }
 .about-body { font-size: 1.05rem; line-height: 1.8; color: var(--fg-dark-muted); margin-bottom: 0.5rem; }
 .about-quote {
@@ -658,13 +677,19 @@ h1, h2, h3, h4 {
 .about-gif { width: 100%; height: 100%; object-fit: fill; }
 
 .team-slider {
+  /* Used to sit on a negative margin so the band overlapped into
+     .section-about's old fade-to-cream tail (hiding the seam under the
+     fade). Now that About is flat dark with no fade, the band just flows
+     after the About content on that same dark background — no overlap
+     needed. Flat dark background all the way down, so Contact's cream
+     starts with a clean, immediate cut instead of a gradient. */
   position: relative;
   width: 100%;
   overflow-x: hidden;
   overflow-y: visible;
-  padding: 0px 0;
-  margin-top: -100px;
-  
+  background: var(--bg-dark-sec);
+  padding: 0 0 4rem;
+  margin-top: 1rem;
 }
 
 .slider-track{
