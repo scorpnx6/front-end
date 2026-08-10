@@ -304,7 +304,12 @@ h1, h2, h3, h4 {
   min-height: 100vh; 
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding-top: 5rem; position: relative; overflow: hidden;
-
+  background: linear-gradient(
+    to bottom,
+    #00000023 0,
+    #080813 50%,   /* stays solid black for most of the section */
+    #F5F1EB 100%   /* fades to white right at the bottom */
+  );
 }
 .showcase-label {
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
@@ -447,14 +452,14 @@ h1, h2, h3, h4 {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 2rem;
+      gap: 8rem;
       width: 100%;
       height: 100%;
 }
         .hero-content {
       flex: 1 1 auto;
-      max-width: 640px;
-      text-align: left;
+      max-width: 100%;
+      text-align: center;
 }
     .hero-logo {
       flex: 0 0 auto;
@@ -484,7 +489,7 @@ h1, h2, h3, h4 {
         width: 60%;
       }
     }
-.hero-inner { max-width: 900px; margin: 0 auto 4rem; text-align: center; }
+.hero-inner {  max-width:1290px; margin: 0 auto 4rem; text-align: center; }
 .hero-badge {
   display: inline-block; font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-light);
@@ -492,7 +497,7 @@ h1, h2, h3, h4 {
   padding: 0.35rem 1rem; margin-bottom: 1.75rem;
 }
 .hero-title {
-  font-size: clamp(3.5rem, 6vw, 8rem); font-weight: 750;
+  font-size: clamp(3.5rem, 8vw, 8rem); font-weight: 750;
   line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem;
   color: var(--text-dark-sec);
 }
@@ -774,7 +779,7 @@ h1, h2, h3, h4 {
 }
 .btn-submit:hover { background: var(--purple-light); transform: translateY(-1px); }
 .btn-submit:disabled { opacity: 0.6; pointer-events: none; }
-.btn-submit svg { width: 1rem; height: 1rem; }
+.btn-submit img { width: 1.5rem; height: 1.5rem; }
 
 .form-success {
   text-align: center; padding: 3rem 2rem;
