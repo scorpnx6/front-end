@@ -1,0 +1,909 @@
+/* ============================================
+   CSS CUSTOM PROPERTIES — THEME TOKENS
+============================================ */
+:root {
+  --dark-bg:        #0e0d1a;
+  --dark-surface:   #111111;
+  --dark-surface-2: #1A1A1A;
+  --dark-border:    rgba(245,241,235,0.08);
+  --dark-border-h:  rgba(245,241,235,0.2);
+  --fg-dark:        #F5F1EB;
+  --fg-dark-muted:  rgba(245,241,235,0.5);
+  --cream-bg:       #F5F1EB;
+  --cream-2:        rgb(237, 233, 226);
+  --cream-border:   rgba(26,20,16,0.1);
+  --fg-light:       #1A1410;
+  --fg-light-muted: rgba(26,20,16,0.52);
+  --purple:         #5B4FE8;
+  --purple-light:   #7B6FF0;
+  --bg-dark-sec:    #080813;
+  --bg-cream-sec:   #F5F1EB;
+  --text-dark-sec:  #F5F1EB;
+  --text-cream-sec: #1A1410;
+  --font-heading: 'Jost', sans-serif;
+}
+
+
+/* ============================================
+   RESET
+============================================ */
+* { box-sizing: border-box; } 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+img, video { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg-dark-sec);
+  color: var(--fg-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.45s, color 0.45s;
+}
+
+
+/* RTL support */
+[dir="rtl"] .nav-inner,
+[dir="rtl"] .nav-links,
+[dir="rtl"] .nav-controls { direction: rtl; }
+[dir="rtl"] .hero-title,
+[dir="rtl"] .hero-sub,
+[dir="rtl"] .section-title,
+[dir="rtl"] .section-sub,
+[dir="rtl"] .about-body,
+[dir="rtl"] .about-quote,
+[dir="rtl"] .contact-info { text-align: right; }
+[dir="rtl"] .hero-cta { justify-content: center; }
+[dir="rtl"] .footer-links,
+[dir="rtl"] .footer-social { flex-direction: row-reverse; }
+[dir="rtl"] .contact-detail { flex-direction: row-reverse; }
+[dir="rtl"] .about-quote {
+  border-left: none;
+  border-right: 3px solid var(--purple);
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+[dir="rtl"] .nav-link::after { left: auto; right: 0; left: 100%; }
+[dir="rtl"] .nav-link:hover::after,
+[dir="rtl"] .nav-link.active::after { left: 0; right: 0; }
+
+/* ============================================
+   INTRO OVERLAY
+============================================ */
+#intro-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #0C0C0C;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+#intro-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.intro-inner { display: flex; align-items: center; justify-content: center; }
+.intro-gif { width: min(420px, 80vw); height: auto; }
+
+/* ============================================
+   CURSOR GLOW
+============================================ */
+#cursor-glow {
+  position: fixed; width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(91,79,232,0.12) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  transition: opacity 0.3s;
+}
+
+/* ============================================
+   NAVIGATION
+============================================ */
+
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 500;  
+  width: 100%;                
+  padding: clamp(0.9rem, 2vw, 1.7rem) clamp(1.25rem, 5vw, 5rem);
+}
+
+
+.nav::before {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;   
+  background: linear-gradient(
+    to bottom,
+    #242431c2 60%,  
+    #f5f1eb00 100%   
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  mask-image: linear-gradient(to bottom, #242431, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #242431, transparent);
+}
+
+.nav.scrolled::before {
+  opacity: 1;  
+}
+
+.nav-inner {
+  position: relative; z-index: 1;   /* sits above ::before, never masked */
+  max-width: 1300px; margin: auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+/* Explicit column placement: without this, hiding .nav-links below 900px
+   (display:none) removes it from the grid item list, so auto-placement
+   shoves .nav-controls into the empty middle track instead of the right
+   one — the controls drift toward center instead of staying flush right. */
+.nav-logo    { grid-column: 1; }
+.nav-links   { grid-column: 2; }
+.nav-controls{ grid-column: 3; }
+.nav-logo-img {
+  height: 47px; width: auto; object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: filter 0.35s;
+  justify-self: start;
+}
+
+.nav-links { display: none; align-items: center; gap: 1.75rem; }
+@media (min-width: 900px) { .nav-links { display: flex; } }
+
+.nav-link {
+  color: var(--fg-dark-muted); font-size: 0.875rem; font-weight: 500;
+  letter-spacing: 0.01em; transition: color 0.2s; position: relative;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 100%;
+  height: 1px; background: var(--purple); transition: right 0.3s ease;
+}
+.nav-link:hover, .nav-link.active { color: var(--fg-dark); }
+.nav-link:hover::after, .nav-link.active::after { right: 0; }
+
+.nav-controls {
+  display: flex; align-items: center; gap: 0.6rem;
+  justify-self: end;
+}
+
+.lang-switcher {
+  display: flex; align-items: center;
+  background: var(--dark-surface); border: 1px solid var(--dark-border);
+  border-radius: 100px; padding: 0.2rem; gap: 0.1rem;
+  transition: border-color 0.3s, background 0.35s;
+}
+[data-theme="light"] .lang-switcher { background: var(--cream-2); border-color: var(--cream-border); }
+
+.lang-btn {
+  background: transparent; border: none; color: var(--fg-dark-muted);
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 0.3rem 0.65rem; border-radius: 100px; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-btn:hover { color: var(--fg-dark); }
+.lang-btn.active { background: var(--purple); color: #ffffff; }
+
+.theme-toggle {
+  width: 2.15rem; height: 2.15rem; border-radius: 50%;
+  border: 1px solid var(--dark-border); background: var(--dark-surface);
+  color: var(--fg-dark); display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--dark-border-h); background: var(--dark-surface-2); }
+.theme-toggle svg { width: 0.95rem; height: 0.95rem; }
+[data-theme="light"] .theme-toggle { background: var(--cream-2); border-color: var(--cream-border); color: var(--fg-light); }
+.icon-sun  { display: none; }
+.icon-moon { display: block; }
+[data-theme="light"] .icon-sun  { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
+
+.nav-cta {
+  display: none; align-items: center;
+  background: var(--purple); color: #fff; border-radius: 50px;
+  padding: 0.52rem 1.2rem; font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.02em; transition: background 0.2s, transform 0.2s;
+
+}
+.nav-cta:hover { background: var(--purple-light); transform: translateY(-1px); }
+@media (min-width: 900px) { .nav-cta { display: inline-flex; } }
+
+.hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; }
+@media (min-width: 900px) { .hamburger { display: none; } }
+.hamburger span {
+  display: block; width: 22px; height: 2px; background: var(--fg-dark);
+  border-radius: 2px; transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Grid 0fr → 1fr trick instead of max-height: iOS Safari is known to
+   silently fail to repaint max-height transitions on flex containers,
+   which is why the menu wasn't appearing on phones. Grid row sizing
+   doesn't have that bug and animates reliably everywhere. */
+.mobile-menu {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease, border-color 0.4s, background 0.4s;
+  background: transparent;   /* only painted when open — a closed 0fr row can still
+                                 leave a sub-pixel sliver, and a transparent one is invisible */
+  border-top: 1px solid transparent;
+}
+.mobile-menu.open {
+  grid-template-rows: 1fr;
+  background: var(--dark-bg);
+  border-top-color: var(--dark-border); /* only shows when opened */
+}
+.mobile-menu-inner {
+  overflow: hidden;          /* required for the grid-rows trick to clip content */
+  display: flex; flex-direction: column;
+  min-height: 0;
+}
+[data-theme="light"] .mobile-menu.open { background: var(--cream-bg); border-color: var(--cream-border); }
+.mobile-link {
+  padding: 1rem 2rem; font-size: 1rem; font-weight: 500;
+  color: var(--fg-dark-muted); border-bottom: 1px solid var(--dark-border);
+  transition: color 0.2s, background 0.2s;
+}
+.mobile-link:hover { color: var(--fg-dark); background: var(--dark-surface); }
+.mobile-link--cta { color: var(--purple); font-weight: 700; }
+[data-theme="light"] .mobile-link { color: var(--fg-light-muted); border-color: var(--cream-border); }
+[data-theme="light"] .mobile-link:hover { background: var(--cream-2); color: var(--fg-light); }
+
+/* ============================================
+   SECTION BASE
+============================================ */
+.section-dark  { background: var(--bg-dark-sec); color: var(--text-dark-sec); }
+.section-cream { background: var(--bg-cream-sec); color: var(--text-cream-sec); }
+
+.section-inner { max-width: 1280px; margin: 0 auto; padding: 6rem 2rem; }
+@media (min-width: 768px) { .section-inner { padding: 8rem 2.5rem; } }
+
+.section-label {
+  display: inline-block; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); margin-bottom: 1.2rem;
+}
+.section-label--light { color: var(--purple-light); }
+
+.section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 600;
+  line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1rem;
+  color: var(--text-cream-sec);
+}
+.section-title--light { color: var(--text-dark-sec); }
+
+.section-sub {
+  font-size: 1.05rem; color: var(--fg-light-muted);
+  line-height: 1.7; max-width: 38rem; margin-bottom: 3.5rem;
+}
+[data-theme="light"] .section-sub { color: var(--fg-dark-muted); }
+
+.section-header { margin-bottom: 3.5rem; }
+
+/* ============================================
+   REVEAL ANIMATIONS
+============================================ */
+.reveal-up {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================
+   SECTION 01 — SHOWCASE (3D Carousel)
+============================================ */
+.section-showcase {
+  min-height: 100vh; 
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding-top: 5rem; position: relative; overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #00000023 0,
+    #080813 50%,   /* stays solid black for most of the section */
+    #F5F1EB 100%   /* fades to white right at the bottom */
+  );
+}
+.showcase-label {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--purple); margin-bottom: 1rem; align-self: flex-start;
+  padding-left: max(2rem, calc(50vw - 640px));
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  perspective: 7000px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+/* The 500px wrapper above is sized for desktop/tablet's much larger cards.
+   On mobile the card is only min(62vw,250px) wide (~227px tall at 11:10),
+   so the fixed 500px box left huge dead space above/below it — read as a
+   big gap under the "01 — Some of our latest work" label and cards that
+   looked tiny. Shrinking the wrapper to track the card's own height lets
+   .section-showcase's existing justify-content:center actually center the
+   label+carousel+hint block in the viewport instead of stranding it under
+   a mostly-empty box. */
+@media (max-width: 767px) {
+  .carousel-wrapper { height: min(68vw, 280px); }
+}
+/* iOS Safari's compositor corrupts colors when too many large,
+   overlapping preserve-3d layers sit under a very high perspective —
+   that's the red/purple banding you saw. Dropping perspective on small
+   screens, in proportion to the smaller carousel radius used there
+   (see getCarouselRadius in script.js), keeps the same visual tilt at a
+   scale iOS composites correctly. (Was mistakenly "500cm" ≈ 18,898px —
+   flatter than the 7000px desktop value, not sharper — which collapsed
+   the whole fan-out into a near-flat stack.)
+   Breakpoint is 899px, not 767px, to match getCarouselRadius()'s own
+   `width < 900` tier — below that the JS radius drops to 390px and the
+   desktop's 7000px perspective is too flat for it. */
+@media (max-width: 899px) {
+  .carousel-wrapper { perspective: 2600px; }
+}
+.carousel-wrapper.is-dragging {
+  cursor: grabbing;
+}
+.carousel-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+.card-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  aspect-ratio: 11 / 10;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  backface-visibility: hidden;      /* stops iOS from compositing hidden backfaces */
+  -webkit-backface-visibility: hidden;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+}
+/* Card width is kept at ~1.85x smaller than getCarouselRadius()'s current
+   tier — the same radius:card-width ratio the desktop layout uses (850px
+   radius / 460px card, "else" tier below) — so side cards clear the front
+   card by the same proportion at every breakpoint instead of overlapping
+   it. Tiers mirror getCarouselRadius() exactly: <768px (min(115.2vw,464px)
+   radius), 768-899px (fixed 390px radius), >=900px (fixed 850px radius,
+   the unmodified 460px default below). Previously this was a flat 460px
+   on every screen below 1024px — wider than the phone itself on mobile,
+   and disproportionately wide next to the small tablet-tier radius. Mobile
+   tier widened from <520 to <768 (and card size raised from min(42vw,178px))
+   so cards fill more of the screen on phones, matching the 767px mobile
+   breakpoint used elsewhere on the site — tablet's own 768-899 tier is
+   unchanged. */
+@media (max-width: 767px) {
+  .card-wrapper { width: min(62vw, 250px); }
+}
+@media (min-width: 768px) and (max-width: 899px) {
+  .card-wrapper { width: 211px; }
+}
+/* Always fills the wrapper above instead of its own breakpoints, which
+   used to fall out of step with .card-wrapper's width (e.g. a 340px inner
+   image sitting inside a 460px tablet wrapper, left-aligned with an empty
+   gutter down one side). */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 26px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+[data-theme="light"] .card-inner { background: #fff; border-color: rgba(0,0,0,0.08); }
+
+[data-theme="light"] .card-wrapper.is-active .card-inner { border-color: rgba(0,0,0,0.18); }
+.card-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-wrapper.is-active .card-inner img { opacity: 1; }
+.card-wrapper:not(.is-active) .card-inner img { opacity: 0.6; }
+.card-wrapper.is-active .card-inner:hover img { transform: scale(1.04); }
+.card-gloss {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2; border-radius: 1.5rem;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 45%, rgba(0,0,0,0.3) 100%);
+}
+.card-ring {
+  position: absolute; inset: 0; pointer-events: none; z-index: 3; border-radius: 1.5rem;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+.card-wrapper.is-active .card-ring { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.22); }
+
+.scroll-hint {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--bg-dark-sec); margin-top: 3rem; margin-bottom: 1.5rem;
+}
+.scroll-hint svg { width: 1rem; height: 1rem; animation: bounceDown 1.8s ease-in-out infinite; }
+@keyframes bounceDown {
+  0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); }
+}
+
+/* ============================================
+   HERO SECTION
+============================================ */
+
+.section-hero {
+  padding: 13rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+}
+ .section-hero .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8rem;
+      width: 100%;
+      height: 100%;
+}
+        .hero-content {
+      flex: 1 1 auto;
+      max-width: 100%;
+      text-align: center;
+}
+    .hero-logo {
+      flex: 0 0 auto;
+      width: 42%;
+      max-width: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+        .hero-logo-video {
+      width: 100%;
+      height: auto;
+      /* video has a dark background — blend it into the hero so only the logo reads */
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+    @media (max-width: 900px) {
+      .section-hero .hero-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-content {
+        max-width: 100%;
+        text-align: center;
+      }
+      .hero-logo {
+        width: 60%;
+      }
+    }
+.hero-inner {  max-width:1290px; margin: 0 auto 4rem; text-align: center; }
+.hero-badge {
+  display: inline-block; font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-light);
+  border: 1px solid var(--purple); border-radius: 100px;
+  padding: 0.35rem 1rem; margin-bottom: 1.75rem;
+}
+.hero-title {
+  font-size: clamp(3.5rem, 8vw, 8rem); font-weight: 750;
+  line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+  color: var(--text-dark-sec);
+}
+.hero-title em {display: block; color: var(--purple-light); font-style: normal; }
+.hero-sub {
+  font-size: 1.1rem; color: var(--fg-dark-muted); line-height: 1.75;
+  max-width: 36rem; margin: 0 auto 2.5rem;
+}
+.hero-cta { display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--purple); color: #fff; border: none; border-radius: 100px;
+  padding: 0.9rem 2.2rem; font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 600; transition: background 0.2s, transform 0.2s; display: inline-block;
+}
+.btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); }
+
+.btn-ghost {
+  background: transparent; color: var(--fg-dark);
+  border: 1px solid var(--dark-border-h); border-radius: 100px;
+  padding: 0.9rem 2.2rem; font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 500; transition: all 0.2s; display: inline-block;
+}
+.btn-ghost:hover { background: var(--dark-surface); transform: translateY(-2px); }
+[data-theme="light"] .btn-ghost { color: var(--fg-light); border-color: rgba(20,18,27,0.3); }
+[data-theme="light"] .btn-ghost:hover { background: var(--cream-2); }
+
+.hero-reel {
+  max-width: 1100px; margin: 0 auto;
+  border-radius: 1.5rem; overflow: hidden; position: relative;
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+  background: #000; cursor: pointer;
+}
+[data-theme="light"] .hero-reel { border-color: var(--cream-border); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+.reel-video { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; opacity: 0.85; transition: opacity 0.3s; }
+.hero-reel:hover .reel-video { opacity: 1; }
+.reel-overlay { position: absolute; bottom: 1.5rem; left: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+.reel-play-btn {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25); color: #fff;
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+}
+.reel-play-btn:hover { background: rgba(255,255,255,0.25); }
+.reel-play-btn svg { width: 0.9rem; height: 0.9rem; }
+.reel-label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; color: rgba(255,255,255,0.75); }
+
+
+
+/* ============================================
+   SERVICES
+============================================ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1.5rem;
+}
+.service-card {
+  background: var(--cream-2); border: 1px solid var(--cream-border);
+  border-radius: 1.25rem; padding: 2rem;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  display: flex; flex-direction: column; gap: 0.85rem;
+}
+[data-theme="light"] .service-card { background: var(--cream-2); border-color: rgba(20,18,27,0.08); }
+.service-card:hover {
+  background: #EDE9E2; border-color: var(--purple);
+  transform: translateY(-4px); box-shadow: 0 16px 40px rgba(91,79,232,0.1);
+}
+[data-theme="light"] .service-card:hover { background: #EDE8FB; }
+.service-icon { font-size: 1.6rem; width: 26px;height: 26px; }
+.service-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600;
+  color: var(--fg-light); line-height: 1.2;
+}
+.service-desc { font-size: 0.9rem; color: var(--fg-light-muted); line-height: 1.65; flex: 1; }
+.service-link {
+  font-size: 0.82rem; font-weight: 600; color: var(--purple);
+  letter-spacing: 0.02em; margin-top: auto; transition: opacity 0.2s;
+}
+.service-link:hover { opacity: 0.75; }
+
+/* ============================================
+   PORTFOLIO
+============================================ */
+.section-portfolio{
+  /* Flat cream — no fade into About. Now a clean cut, matching the same
+     treatment on the card band's transition into Contact. */
+  background: #F5F1EB;
+  padding-bottom:50px ;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
+  gap: 2rem;
+}
+.portfolio-card {
+  border-radius: 1.25rem; overflow: hidden;
+  border: 1px solid var(--cream-border); background: var(--cream-2);
+  transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
+}
+[data-theme="light"] .portfolio-card { background: #fff; }
+.portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(91,79,232,0.12); }
+.portfolio-img-wrap { position: relative; overflow: hidden; aspect-ratio: 16/10; }
+.portfolio-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.55s ease; }
+.portfolio-card:hover .portfolio-img-wrap img { transform: scale(1.06); }
+.portfolio-overlay {
+  position: absolute; inset: 0; background: rgba(91,79,232,0.88);
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  color: #fff; opacity: 0; transition: opacity 0.3s;
+}
+.portfolio-card:hover .portfolio-overlay { opacity: 1; }
+.portfolio-overlay svg { width: 1.1rem; height: 1.1rem; }
+.portfolio-view { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.portfolio-meta { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.65rem; }
+.portfolio-cat { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); }
+.portfolio-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600;
+  color: var(--fg-light); line-height: 1.25;
+}
+.portfolio-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.portfolio-tags span {
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em;
+  background: rgba(91,79,232,0.1); color: var(--purple); padding: 0.2rem 0.65rem; border-radius: 100px;
+}
+.portfolio-cta { text-align: center; margin-top: 3rem; }
+.btn-outline {
+  display: inline-block; border: 1px solid rgba(26,20,16,0.25); color: var(--fg-light);
+  border-radius: 100px; padding: 0.9rem 2.2rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--purple); color: #fff; border-color: var(--purple); transform: translateY(-2px); }
+[data-theme="light"] .btn-outline { border-color: rgba(20,18,27,0.2); color: var(--fg-light); }
+
+/* ============================================
+   ABOUT
+============================================ */
+.section-about{
+  /* Flat dark — the portfolio section above already fades beige-to-black
+     on its own, and the card band below sits on this same background, so
+     About no longer needs its own fade-to-cream (that was bleeding beige
+     through the transparent card band via the negative margins below). */
+  background: #080813;
+}
+/* The shared .section-inner padding (6-8rem top and bottom) reads as dead
+   black space both before the "04 — About" label and again between the
+   purple card and the card band below — the band already adds its own
+   margin on top of this. Trim both sides to a normal, single gap. */
+.section-about .section-inner { padding-top: 3rem; padding-bottom: 2rem; }
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem;
+}
+@media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; }  }
+.about-body { font-size: 1.05rem; line-height: 1.8; color: var(--fg-dark-muted); margin-bottom: 0.5rem; }
+.about-quote {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; font-weight: 500;
+  color: var(--fg-dark); line-height: 1.5;
+  border-left: 3px solid var(--purple); padding-left: 1.5rem; margin-top: 1.5rem;
+}
+.about-visual {
+  border-radius: 1rem; overflow: hidden; border: 1px solid var(--dark-border);
+  margin-bottom: 2rem; aspect-ratio: 1/1; max-width: 500px;
+}
+.about-gif { width: 100%; height: 100%; object-fit: fill; }
+.slider-track h3{ 
+  color: #F5F1EB;
+}
+.team-slider {
+  /* Used to sit on a negative margin so the band overlapped into
+     .section-about's old fade-to-cream tail (hiding the seam under the
+     fade). Now that About is flat dark with no fade, the band just flows
+     after the About content on that same dark background — no overlap
+     needed. Flat dark background all the way down, so Contact's cream
+     starts with a clean, immediate cut instead of a gradient. */
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: visible;
+  background: rgba(245, 245, 220, 0);
+  padding: -10rem 0 -4rem;
+  margin-top: 1rem;
+}
+
+.slider-track{
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  padding: 30px;
+  margin:-1rem;
+  animation: scroll 50s linear infinite;
+}
+
+.card{
+    width:350px;
+    height:100px;
+    display:flex;
+    align-items:baseline;
+    gap:20px;
+    padding:25px;
+    border-radius:28px;
+    background-color: #ffffff0c;
+    flex-shrink:0;
+    border-radius: 16px;
+    backdrop-filter: blur(10.3px);-webkit-backdrop-filter: blur(10.3px);
+}
+.card .pillar-num { color: var(--purple); font-size: auto; align-items: center;} 
+
+.card h3{
+    color:#F5F1EB;
+    font-size:20px;
+    margin-bottom:8px;
+    align-items: center;
+}[data-theme="light"] .card h3 { color :#000;}
+
+@keyframes scroll{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(calc(-50% - 15px));
+    }
+
+}
+
+/* ============================================
+   CONTACT
+============================================ */
+.section-contact{background: linear-gradient(
+    to top,
+    #F5F1EB 85%,   /* stays solid black for most of the section */
+    #ded9d2 100%   /* fades to white right at the bottom */
+  ); }
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+@media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1.3fr; align-items: start; gap: 5rem; } }
+.contact-sub { font-size: 1rem; color: var(--fg-light-muted); line-height: 1.7; margin: 0.75rem 0 2rem; }
+.contact-details { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+.contact-detail {
+  display: flex; align-items: center; gap: 0.85rem; font-size: 0.9rem;
+  color: var(--fg-light-muted); transition: color 0.2s;
+}
+.contact-detail:hover { color: var(--fg-light); }
+.contact-detail svg { width: 1.1rem; height: 1.1rem; color: var(--purple); flex-shrink: 0; }
+.whatsapp-btn {
+  display: inline-flex; align-items: center; gap: 0.65rem;
+  background: #25D366; color: #fff; border-radius: 100px;
+  padding: 0.7rem 1.4rem; font-size: 0.85rem; font-weight: 600;
+  transition: opacity 0.2s, transform 0.2s; margin-top: 0.5rem;
+}
+.whatsapp-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.whatsapp-btn svg { width: 1.1rem; height: 1.1rem; }
+
+.contact-form-wrap {
+  background: var(--cream-2); border: 1px solid var(--cream-border);
+  border-radius: 1.5rem; padding: 2.5rem 2rem;
+}
+[data-theme="light"] .contact-form-wrap { background: var(--cream-2); border-color: rgba(20,18,27,0.08); }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label { font-size: 0.8rem; font-weight: 600; color: var(--fg-light-muted); letter-spacing: 0.03em; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%; background: var(--cream-bg); border: 1px solid var(--cream-border);
+  border-radius: 0.75rem; padding: 0.85rem 1rem;
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; color: var(--fg-light);
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: vertical;
+}
+[data-theme="light"] .contact-form input,
+[data-theme="light"] .contact-form textarea { background: #fff; }
+.contact-form input:focus, .contact-form textarea:focus {
+  border-color: var(--purple); box-shadow: 0 0 0 3px rgba(91,79,232,0.12);
+}
+.contact-form input.invalid, .contact-form textarea.invalid { border-color: #e53e3e; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--fg-light-muted); }
+
+.service-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
+.chip {
+  border: 1px solid var(--cream-border); background: var(--cream-bg); color: var(--fg-light-muted);
+  border-radius: 100px; padding: 0.4rem 0.9rem; font-size: 0.78rem; font-weight: 500; transition: all 0.18s;
+}
+[data-theme="light"] .chip { background: #fff; }
+.chip:hover { border-color: var(--purple); color: var(--purple); }
+.chip.selected { background: var(--purple); border-color: var(--purple); color: #fff; }
+
+.form-error { font-size: 0.82rem; color: #e53e3e; min-height: 1rem; font-weight: 500; }
+.btn-submit {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  background: var(--purple); color: #fff; border: none; border-radius: 100px;
+  padding: 0.95rem 2rem; font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 600; width: 100%; transition: background 0.2s, transform 0.2s;
+}
+.btn-submit:hover { background: var(--purple-light); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.6; pointer-events: none; }
+.btn-submit img { width: 1.5rem; height: 1.5rem; }
+
+.form-success {
+  text-align: center; padding: 3rem 2rem;
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+}
+.form-success svg { width: 3rem; height: 3rem; color: #48BB78; }
+.form-success h3 {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--fg-light);
+}
+.form-success p { color: var(--fg-light-muted); font-size: 0.95rem; }
+
+/* ============================================
+   FOOTER
+============================================ */
+.footer { background: var(--bg-dark-sec);
+   color: var(--text-dark-sec);
+    border-top: 1px solid var(--dark-border);
+  min-height: 60vh;
+  overflow: hidden;
+  position: relative;
+} 
+.footer-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2rem 2rem; }
+.footer-top {
+  display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+  text-align: center; margin-bottom: 3rem;position: relative;
+    z-index: 20;
+}
+.footer-mid {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 1.75rem; margin-bottom: 2.5rem;
+}
+@media (min-width: 768px) { .footer-mid { flex-direction: row; justify-content: space-between; } .footer{min-height: 60vh;}}
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem 2rem; }
+.footer-links a { font-size: 0.85rem; font-weight: 500; color: var(--fg-dark-muted); transition: color 0.2s; }
+.footer-links a:hover { color: var(--fg-dark); }
+.footer-social { display: flex; gap: 1.1rem;z-index: 20; }
+.footer-social a {
+  width: 2.1rem; height: 2.1rem; border-radius: 50%; border: 1px solid var(--dark-border);
+  color: var(--fg-dark-muted); display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.footer-social a:hover { border-color: var(--purple); color: var(--purple); background: rgba(91,79,232,0.1); }
+.footer-social svg { width: 0.95rem; height: 0.95rem; }
+.footer-bottom {
+    position: absolute;
+
+    left: 4.3vw;
+    right: 4.3vw;
+    bottom: 24px;
+
+    height: 50px;
+
+    border-top: 1px solid rgba(244, 240, 233, 0.12);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding-top: 18px;
+
+    z-index: 30;
+}
+.footer-bottom span {
+    font-size: 13px;
+    color: rgba(244, 240, 233, 0.65);
+    font-family: 'cursive', serif;
+}
+/* =====================================================
+FOOTER SLIDE
+===================================================== */
+
+
+.footer-word {
+    width: max-content;
+
+    margin: 0 auto;
+
+    font-size: clamp(150px, 15vw, 320px);
+
+    font-weight: 700;
+
+    line-height: .65;
+
+    letter-spacing:0;
+
+    white-space: nowrap;
+
+    color: #f4f0e9;
+
+    transform: translateX(100vw);
+
+    will-change: transform;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .footer-word {
+        font-size: 15vw;
+    }
+
+}
