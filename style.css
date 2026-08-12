@@ -300,20 +300,22 @@ body {
   min-height: 100vh; 
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding-top: 5rem; position: relative; overflow: hidden;
-  background: linear-gradient(
-    to bottom,
-    #00000023 0,
-    #080813 50%,   /* stays solid black for most of the section */
-    #F5F1EB 100%   /* fades to white right at the bottom */
-  );
+  border-radius: 0 0 50px 50px;
+  background-color: #080813;
 }
 .showcase-label {
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--purple); margin-bottom: 1rem; align-self: flex-start;
-  padding-left: max(2rem, calc(50vw - 640px));
+    font-size: 1.1rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color:#F5F1EB;
+    margin-bottom: 1rem;
+    align-self:center;
+    padding: 50px;
     opacity: 0.72;
-  transform: translateY(10px);
-  transition: opacity 0.6s ease, transform 0.6s ease;}
+    transform: translateY(10px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
 .carousel-wrapper {
   position: relative;
   width: 100%;
@@ -426,7 +428,7 @@ body {
 .scroll-hint {
   display: flex; align-items: center; gap: 0.5rem;
   font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--bg-dark-sec); margin-top: 3rem; margin-bottom: 1.5rem;
+  color: #F5F1EB; margin-top: 3rem; margin-bottom: 1.5rem;
 }
 .scroll-hint svg { width: 1rem; height: 1rem; animation: bounceDown 1.8s ease-in-out infinite; }
 @keyframes bounceDown {
@@ -577,13 +579,12 @@ body {
   pointer-events: none;
   z-index: 3;
 }
-.showcase-label::before {
+.showcase-label::after {
   content: "";
   display: block;
-  width: 70px;
-  height: 1px;
-  margin-bottom: 18px;
-
+  width: 120px;
+  height: 2px;
+ margin: 18px auto 0;
   background: linear-gradient(
     90deg,
     rgba(91, 79, 232, 0),
@@ -601,7 +602,9 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 1.5rem;
   padding-bottom: -5rem;
+  
 }
+.section-services{margin-top:-80px;}
 .service-card {
   background: var(--cream-2); border: 1px solid var(--cream-border);
   border-radius: 1.25rem; padding: 2rem;
