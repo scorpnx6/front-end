@@ -14,7 +14,7 @@
   --cream-border:   rgba(26,20,16,0.1);
   --fg-light:       #1A1410;
   --fg-light-muted: rgba(26,20,16,0.52);
-  --purple:         #5B4FE8;
+  --purple:         #6A5CFF;
   --purple-light:   #7B6FF0;
   --bg-dark-sec:    #080813;
   --bg-cream-sec:   #F5F1EB;
@@ -114,13 +114,13 @@ body {
   transition: opacity 0.5s ease-in-out;   
   background: linear-gradient(
     to bottom,
-    #242431c2 60%,  
+    #24243194 90%,  
     #f5f1eb00 100%   
   );
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  mask-image: linear-gradient(to bottom, #242431, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, #242431, transparent);
+  mask-image: linear-gradient(to bottom, #2d263d, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #2d263d, transparent);
 }
 
 .nav.scrolled::before {
@@ -269,7 +269,7 @@ body {
 .section-label--light { color: var(--purple-light); }
 
 .section-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+ 
   font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 600;
   line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1rem;
   color: var(--text-cream-sec);
@@ -311,8 +311,9 @@ body {
   font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--purple); margin-bottom: 1rem; align-self: flex-start;
   padding-left: max(2rem, calc(50vw - 640px));
-}
-
+    opacity: 0.72;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;}
 .carousel-wrapper {
   position: relative;
   width: 100%;
@@ -556,7 +557,40 @@ body {
 .reel-play-btn:hover { background: rgba(255,255,255,0.25); }
 .reel-play-btn svg { width: 0.9rem; height: 0.9rem; }
 .reel-label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; color: rgba(255,255,255,0.75); }
+.section-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 180px;
 
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 5, 15, 0) 0%,
+    rgba(5, 5, 15, 0.08) 20%,
+    rgba(5, 5, 15, 0.35) 45%,
+    rgba(5, 5, 15, 0.75) 72%,
+    var(--bg-dark-sec) 100%
+  );
+
+  pointer-events: none;
+  z-index: 3;
+}
+.showcase-label::before {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 1px;
+  margin-bottom: 18px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(91, 79, 232, 0),
+    rgba(91, 79, 232, 0.8),
+    rgba(91, 79, 232, 0)
+  );
+}
 
 
 /* ============================================
@@ -566,6 +600,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 1.5rem;
+  padding-bottom: -5rem;
 }
 .service-card {
   background: var(--cream-2); border: 1px solid var(--cream-border);
@@ -581,7 +616,7 @@ body {
 [data-theme="light"] .service-card:hover { background: #EDE8FB; }
 .service-icon { font-size: 1.6rem; width: 26px;height: 26px; }
 .service-name {
-  font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600;
+  font-size: 1.1rem; font-weight: 600;
   color: var(--fg-light); line-height: 1.2;
 }
 .service-desc { font-size: 0.9rem; color: var(--fg-light-muted); line-height: 1.65; flex: 1; }
@@ -594,11 +629,12 @@ body {
 /* ============================================
    PORTFOLIO
 ============================================ */
-.section-portfolio{
-  /* Flat cream — no fade into About. Now a clean cut, matching the same
-     treatment on the card band's transition into Contact. */
-  background: #F5F1EB;
-  padding-bottom:50px ;
+.section-portfolio {
+    background: rgb(245, 241, 235);
+    padding-bottom: 50px;
+    margin-top:-80px;
+        border-radius:
+        0 0 50px 50px;
 }
 .portfolio-grid {
   display: grid;
@@ -626,7 +662,7 @@ body {
 .portfolio-meta { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.65rem; }
 .portfolio-cat { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); }
 .portfolio-name {
-  font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600;
+ font-size: 1.25rem; font-weight: 600;
   color: var(--fg-light); line-height: 1.25;
 }
 .portfolio-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -651,12 +687,13 @@ body {
      About no longer needs its own fade-to-cream (that was bleeding beige
      through the transparent card band via the negative margins below). */
   background: #080813;
+
 }
 /* The shared .section-inner padding (6-8rem top and bottom) reads as dead
    black space both before the "04 — About" label and again between the
    purple card and the card band below — the band already adds its own
    margin on top of this. Trim both sides to a normal, single gap. */
-.section-about .section-inner { padding-top: 3rem; padding-bottom: 2rem; }
+.section-about .section-inner { padding-top: 3rem; padding-bottom: 0rem; }
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 4rem;
 }
 @media (min-width: 900px) { .about-grid { grid-template-columns: 1fr 1fr; align-items: start; gap: 6rem; }  }
@@ -686,16 +723,19 @@ body {
   overflow-x: hidden;
   overflow-y: visible;
   background: rgba(245, 245, 220, 0);
-  padding: -10rem 0 -4rem;
+  padding: -5rem 0 -4rem;
   margin-top: 1rem;
+      border-radius:
+        0 0 50px 50px;
+  background: #080813;
 }
 
 .slider-track{
   display: flex;
   gap: 30px;
   width: max-content;
-  padding: 30px;
-  margin:-1rem;
+  padding: 0px;
+  margin:1rem;
   animation: scroll 50s linear infinite;
 }
 
@@ -707,10 +747,11 @@ body {
     gap:20px;
     padding:25px;
     border-radius:28px;
-    background-color: #ffffff0c;
+    background-color: #ffffff23;
     flex-shrink:0;
     border-radius: 16px;
-    backdrop-filter: blur(10.3px);-webkit-backdrop-filter: blur(10.3px);
+    backdrop-filter: blur(10.3px);
+    -webkit-backdrop-filter: blur(10.3px);
 }
 .card .pillar-num { color: var(--purple); font-size: auto; align-items: center;} 
 
@@ -740,7 +781,13 @@ body {
     to top,
     #F5F1EB 85%,   /* stays solid black for most of the section */
     #ded9d2 100%   /* fades to white right at the bottom */
-  ); }
+  );
+
+    border-radius:
+        0 0 50px 50px;
+          margin-top: -50px;
+    background: #ded9d2; }
+        
 .contact-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
 @media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1.3fr; align-items: start; gap: 5rem; } }
 .contact-sub { font-size: 1rem; color: var(--fg-light-muted); line-height: 1.7; margin: 0.75rem 0 2rem; }
@@ -762,10 +809,18 @@ body {
 
 .contact-form-wrap {
   background: var(--cream-2); border: 1px solid var(--cream-border);
-  border-radius: 1.5rem; padding: 2.5rem 2rem;
+  border-radius: 1.5rem; padding: 2.5rem 2rem;transition: 
+        background 0.5s ease,
+        box-shadow 0.5s ease,
+        transform 0.5s ease;
 }
 [data-theme="light"] .contact-form-wrap { background: var(--cream-2); border-color: rgba(20,18,27,0.08); }
-.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.contact-form { display: flex; flex-direction: column; gap: 1rem;    transition: all 0.4s ease; }
+.contact-form-wrap:hover {
+    background:var(--cream-2);
+    box-shadow:
+        0 0 100px #1a14107c;
+}
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -818,12 +873,11 @@ body {
 /* ============================================
    FOOTER
 ============================================ */
-.footer { background: var(--bg-dark-sec);
-   color: var(--text-dark-sec);
-    border-top: 1px solid var(--dark-border);
+.footer { 
   min-height: 60vh;
   overflow: hidden;
   position: relative;
+  background: transparent;
 } 
 .footer-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2rem 2rem; }
 .footer-top {
@@ -868,7 +922,7 @@ body {
 .footer-bottom span {
     font-size: 13px;
     color: rgba(244, 240, 233, 0.65);
-    font-family: 'cursive', serif;
+    font-family: 'Courier New', Courier, monospace;
 }
 /* =====================================================
 FOOTER SLIDE
