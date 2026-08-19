@@ -6,6 +6,15 @@
 'use strict';
 
 /* ============================================
+   API CONFIGURATION
+============================================ */
+const API = {
+  BASE_URL: 'https://digitalzn-production.up.railway.app',
+  CONTACT: '/api/contact'
+};
+
+
+/* ============================================
    TRANSLATIONS
 ============================================ */
 const LANG = {
@@ -253,22 +262,24 @@ const LANG = {
     card5_cat:   'إنتاج الفيديو',
   }
 };
-
+/* ============================================
+   background animation
+============================================ */
 /* ============================================
    CAROUSEL DATA
 ============================================ */
 const CARDS = [
   { img: 'assets/pr2.jpg',     titleKey: 'card1_title', catKey: 'card1_cat' },
-  { img: 'assets/portfolio-brand.png',   titleKey: 'card2_title', catKey: 'card2_cat' },
-  { img: 'assets/portfolio-landing.png',     titleKey: 'card3_title', catKey: 'card3_cat' },
+  { img: 'assets/b152a9192944243.65e6201706c6f.png',   titleKey: 'card2_title', catKey: 'card2_cat' },
+  { img: 'assets/cf0879199625531.66e5ba2a7c4f2.jpg',     titleKey: 'card3_title', catKey: 'card3_cat' },
   { img: 'assets/yyt.png',  titleKey: 'card4_title', catKey: 'card4_cat' },
-  { img: 'assets/prj2.jpg',  titleKey: 'card5_title', catKey: 'card5_cat' },
+  { img: 'assets/prj2.gif',  titleKey: 'card5_title', catKey: 'card5_cat' },
   { img: 'assets/fffs.jpg',   titleKey: 'card2_title', catKey: 'card6_cat' },
-  { img: 'assets/oopsd.png',   titleKey: 'card2_title', catKey: 'card7_cat' },
+  { img: 'assets/oopsd.jpg',   titleKey: 'card2_title', catKey: 'card7_cat' },
     { img: 'assets/yyt.png',  titleKey: 'card4_title', catKey: 'card8_cat' },
-  { img: 'assets/prj2.jpg',  titleKey: 'card5_title', catKey: 'card9_cat' },
+  { img: 'assets/prj2.gif',  titleKey: 'card5_title', catKey: 'card9_cat' },
   { img: 'assets/fffs.jpg',   titleKey: 'card2_title', catKey: 'card10_cat' },
-  { img: 'assets/oopsd.png',   titleKey: 'card2_title', catKey: 'card11_cat' },
+  { img: 'assets/oopsd.jpg',   titleKey: 'card2_title', catKey: 'card11_cat' },
 ];
 
 /* ============================================
@@ -446,7 +457,7 @@ function buildCarousel() {
 
 function getCarouselRadius() {
   const width = window.innerWidth;
-  if (width < 520) return Math.min(width * 0.78, 330);
+  if (width < 768) return Math.min(width * 1.152, 464);
   if (width < 900) return 390;
   return 850;
 }
@@ -454,6 +465,12 @@ function getCarouselRadius() {
 function normalizeAngle(angle) {
   return ((angle + 180) % 360 + 360) % 360 - 180;
 }
+
+// Caps how many 3D-transformed cards iOS has to composite at once —
+// fewer overlapping preserve-3d layers means less chance of the
+// color-corruption glitch, even with the lowered mobile perspective.
+const IS_TOUCH_DEVICE = window.matchMedia('(pointer: coarse)').matches
+                      || window.innerWidth < 768;
 
 function positionCircularCards() {
   const wrappers = document.querySelectorAll('.card-wrapper');
@@ -475,6 +492,7 @@ function positionCircularCards() {
 
   wrappers.forEach((wrapper, i) => {
     const angle = i * step + carouselAngle;
+    const normalized = normalizeAngle(angle);
     const depth = Math.cos(angle * Math.PI / 180);
     const opacity = 0.28 + Math.max(depth, 0) * 0.72;
     const scale = 0.78 + Math.max(depth, 0) * 0.22;
@@ -484,6 +502,11 @@ function positionCircularCards() {
     wrapper.style.opacity = opacity.toFixed(3);
     wrapper.style.transform =
       `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px) scale(${scale})`;
+
+    // On mobile, fully skip compositing cards facing well away from
+    // the front — caps simultaneous 3D layers and avoids the iOS glitch.
+    wrapper.style.visibility = (IS_TOUCH_DEVICE && Math.abs(normalized) > 100)
+      ? 'hidden' : 'visible';
   });
 }
 
@@ -649,12 +672,13 @@ function initForm() {
     chip.addEventListener('click', () => chip.classList.toggle('selected'));
   });
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     errorBox.textContent = '';
 
     const name    = form.name.value.trim();
     const email   = form.email.value.trim();
+    const phone   = form.phone.value.trim();
     const message = form.message.value.trim();
 
     if (!name) {
@@ -663,12 +687,14 @@ function initForm() {
       form.name.focus();
       return;
     }
+
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       errorBox.textContent = t('err_email');
       form.email.classList.add('invalid');
       form.email.focus();
       return;
     }
+
     if (message.length < 10) {
       errorBox.textContent = t('err_msg');
       form.message.classList.add('invalid');
@@ -676,24 +702,50 @@ function initForm() {
       return;
     }
 
-    // Collect selected services
+    // Collect selected services as an array, matching the old website/backend format.
     const services = Array.from(document.querySelectorAll('#serviceChips .chip.selected'))
-      .map(c => c.dataset.val).join(', ');
+      .map(chip => chip.dataset.val);
 
-    // Build mailto link
-    const subject = encodeURIComponent(`[Digital ZN] New inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${form.phone.value.trim() || 'N/A'}\nServices: ${services || 'Not specified'}\n\nMessage:\n${message}`
-    );
-    window.location.href = `mailto:contact@digital-zn.com?subject=${subject}&body=${body}`;
+    const payload = {
+      name,
+      email,
+      phone,
+      services,
+      message
+    };
 
-    // Show success UI after slight delay
     submitBtn.disabled = true;
-    submitLbl.textContent = '✓';
-    setTimeout(() => {
-      form.style.display   = 'none';
-      success.style.display = 'flex';
-    }, 800);
+    submitLbl.textContent = 'Sending...';
+
+    try {
+      const response = await fetch(`${API.BASE_URL}${API.CONTACT}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (_) {
+        // Keep the generic error below if the backend does not return JSON.
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message.');
+      }
+
+      form.style.display = 'none';
+      if (success) success.style.display = 'flex';
+    } catch (error) {
+      console.error('Contact form error:', error);
+      errorBox.textContent = error.message || 'Something went wrong. Please try again.';
+    } finally {
+      submitBtn.disabled = false;
+      submitLbl.textContent = t('form_send');
+    }
   });
 
   // Clear invalid state on focus
@@ -715,7 +767,6 @@ function initMarquee() {
   parent.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
   parent.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
 }
-
 /* ============================================
    FOOTER YEAR
 ============================================ */
@@ -723,7 +774,6 @@ function initFooter() {
   const el = $('year');
   if (el) el.textContent = new Date().getFullYear();
 }
-
 /* ============================================
    SMOOTH SCROLL for anchor links
 ============================================ */
@@ -736,6 +786,88 @@ function initSmoothScroll() {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+}
+
+/* =====================================================
+   DIGITAL ZN FOOTER TEXT SLIDE
+===================================================== */
+
+function initFooterTextSlide() {
+
+    const footer = document.querySelector('.footer');
+    const word = document.querySelector('.footer-word');
+
+    if (!footer || !word) return;
+
+
+    function updateFooterWord() {
+
+        const rect =
+            footer.getBoundingClientRect();
+
+        const viewportHeight =
+            window.innerHeight;
+
+
+        /*
+          How far the footer has entered
+          the viewport.
+        */
+
+        const distance =
+            viewportHeight - rect.top;
+
+
+        const animationDistance =
+            viewportHeight * 0.5;
+
+
+        let progress =
+            distance / animationDistance;
+
+
+        /*
+          Keep between 0 and 1
+        */
+
+        progress =
+            Math.max(
+                0,
+                Math.min(1, progress)
+            );
+
+
+        /*
+          RIGHT → LEFT
+
+          100vw = completely to the right
+
+          0vw = normal centered position
+        */
+
+        const movement =
+            20 - (progress * 20);
+
+
+        word.style.transform =
+            `translateX(${movement}vw)`;
+    }
+
+
+    window.addEventListener(
+        'scroll',
+        updateFooterWord,
+        { passive: true }
+    );
+
+
+    window.addEventListener(
+        'resize',
+        updateFooterWord
+    );
+
+
+    updateFooterWord();
 }
 
 /* ============================================
@@ -753,6 +885,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initForm();
   initMarquee();
   initFooter();
+
+  /* DIGITALZN FOOTER */
+  initFooterTextSlide();
+
   initSmoothScroll();
   updateActiveLink();
 });
