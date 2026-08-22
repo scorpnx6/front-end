@@ -51,7 +51,7 @@ form-action 'self';
   <!-- NAVIGATION -->
   <nav class="nav" id="mainNav">
     <div class="nav-inner">
-      <a href="#home" class="nav-logo" aria-label="Digital ZN Home">
+      <a href="#hero" class="nav-logo" aria-label="Digital ZN Home">
         <img src="assets/logo.png" alt="Digital ZN" class="nav-logo-img" />
       </a>
       <div class="nav-links" id="navLinks">
@@ -123,18 +123,7 @@ form-action 'self';
 
         <div class="hero-device-glow"></div>
 
-        <video
-            class="hero-device-video"
-            autoplay
-            muted
-            loop
-            playsinline
-        >
-            <source
-                src="assets/Main_Files.mp4"
-            >
-        </video>
-
+        <img class="hero-device-video" src="assets/finaaaaal .gif">
     </div>
     </div>
 
@@ -163,48 +152,134 @@ form-action 'self';
         </p>
       </div>
       <div class="services-grid">
-        <div class="service-card reveal-up">
-          <div class="service-icon"><img src="assets/icons/socual.png" alt=""></div>
+
+        <!-- =========================================================
+             SERVICE 01
+             CHANGE THE MAIN CARD IMAGE: the <img src="..."> below
+             CHANGE THE EXPANDED DIALOG IMAGE: data-dialog-image="..."
+             CHANGE THE CARD TITLE: the data-i18n key (srv1_name)
+             CHANGE THE EXPANDED TITLE/DESCRIPTION: the dialog keys
+             srv1_dialog_title / srv1_dialog_desc in main.js
+        ========================================================== -->
+        <div
+          class="service-card reveal-up"
+          data-service="1"
+          data-dialog-title-key="srv1_dialog_title"
+          data-dialog-desc-key="srv1_dialog_desc"
+          data-dialog-image="assets/icons/socual.png"
+        >
+          <!-- MAIN CARD IMAGE -->
+          <div class="service-icon">
+            <img src="assets/icons/socual.png" alt="">
+          </div>
+
+          <!-- MAIN CARD TITLE -->
           <h3 class="service-name" data-i18n="srv1_name">Social Media Design</h3>
-          <p class="service-desc" data-i18n="srv1_desc">Eye-catching posts, stories, covers, and templates tailored for
-            your brand voice across all platforms.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+
+          <p class="service-desc" data-i18n="srv1_desc">
+            Eye-catching posts, stories, covers, and templates tailored for your brand voice across all platforms.
+          </p>
+
+          <button class="service-expand" type="button" aria-label="Open service">
+            <span>+</span>
+          </button>
         </div>
-        <div class="service-card reveal-up">
-          <div class="service-icon"><img src="assets/icons/graphic-01.png" alt=""></div>
+
+        <!-- SERVICE 02 -->
+        <div
+          class="service-card reveal-up"
+          data-service="2"
+          data-dialog-title-key="srv2_dialog_title"
+          data-dialog-desc-key="srv2_dialog_desc"
+          data-dialog-image="assets/icons/graphic-01.png"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/graphic-01.png" alt="">
+          </div>
           <h3 class="service-name" data-i18n="srv2_name">Graphic Design</h3>
-          <p class="service-desc" data-i18n="srv2_desc">Print-on-demand, books, roll-ups, brochures, animated PowerPoint
-            presentations, and more.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <p class="service-desc" data-i18n="srv2_desc">
+            Print-on-demand, books, roll-ups, brochures, animated PowerPoint presentations, and more.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
-          <div class="service-icon"><img src="assets/icons/diam-01.png" alt=""></div>
+
+        <!-- SERVICE 03 -->
+        <div
+          class="service-card reveal-up"
+          data-service="3"
+          data-dialog-title-key="srv3_dialog_title"
+          data-dialog-desc-key="srv3_dialog_desc"
+          data-dialog-image="assets/icons/diam-01.png"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/diam-01.png" alt="">
+          </div>
           <h3 class="service-name" data-i18n="srv3_name">Brand Identity</h3>
-          <p class="service-desc" data-i18n="srv3_desc">Full brand systems — concept, logo, color palette, typography,
-            mockups, and brand guidelines.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <p class="service-desc" data-i18n="srv3_desc">
+            Full brand systems — concept, logo, color palette, typography, mockups, and brand guidelines.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
-          <div class="service-icon"><img src="assets/icons/web-01.png" alt=""></div>
+
+        <!-- SERVICE 04 -->
+        <div
+          class="service-card reveal-up"
+          data-service="4"
+          data-dialog-title-key="srv4_dialog_title"
+          data-dialog-desc-key="srv4_dialog_desc"
+          data-dialog-image="assets/icons/web-01.png"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/web-01.png" alt="">
+          </div>
           <h3 class="service-name" data-i18n="srv4_name">Landing Pages</h3>
-          <p class="service-desc" data-i18n="srv4_desc">High-converting landing pages built with HTML, CSS & JavaScript
-            — clean, fast, and responsive.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <p class="service-desc" data-i18n="srv4_desc">
+            High-converting landing pages built with HTML, CSS & JavaScript — clean, fast, and responsive.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
-          <div class="service-icon"><img src="assets/icons/play-01.png" alt=""></div>
+
+        <!-- SERVICE 05 -->
+        <div
+          class="service-card reveal-up"
+          data-service="5"
+          data-dialog-title-key="srv5_dialog_title"
+          data-dialog-desc-key="srv5_dialog_desc"
+          data-dialog-image="assets/icons/play-01.png"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/play-01.png" alt="">
+          </div>
           <h3 class="service-name" data-i18n="srv5_name">Video Editing</h3>
-          <p class="service-desc" data-i18n="srv5_desc">Professional video editing for reels, ads, and promotional
-            content that captivates your audience.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <p class="service-desc" data-i18n="srv5_desc">
+            Professional video editing for reels, ads, and promotional content that captivates your audience.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
-          <div class="service-icon"><img src="assets/icons/Untitled-1-01.png" alt=""></div>
+
+        <!-- SERVICE 06 -->
+        <div
+          class="service-card reveal-up"
+          data-service="6"
+          data-dialog-title-key="srv6_dialog_title"
+          data-dialog-desc-key="srv6_dialog_desc"
+          data-dialog-image="assets/icons/Untitled-1-01.png"
+        >
+          <!-- CHANGE MAIN CARD IMAGE HERE -->
+          <div class="service-icon">
+            <img src="assets/icons/Untitled-1-01.png" alt="">
+          </div>
           <h3 class="service-name" data-i18n="srv6_name">Videography</h3>
-          <p class="service-desc" data-i18n="srv6_desc">Photography and videography sessions to produce stunning visual
-            content for your brand.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <p class="service-desc" data-i18n="srv6_desc">
+            Photography and videography sessions to produce stunning visual content for your brand.
+          </p>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
+
       </div>
     </div>
   </section>
@@ -490,6 +565,58 @@ form-action 'self';
 
   </div>
 </footer>
+<!-- SERVICE MORPH DIALOG -->
+<div class="service-dialog" id="serviceDialog" aria-hidden="true">
+
+  <div class="service-dialog-backdrop"></div>
+
+<div class="service-dialog-container">
+
+  <button
+    class="service-dialog-close"
+    id="serviceDialogClose"
+    type="button"
+    aria-label="Close service"
+  >
+    ×
+  </button>
+
+  <!-- BIG IMAGE -->
+  <div class="service-dialog-image" id="dialogImage"></div>
+
+  <!-- CONTENT -->
+  <div class="service-dialog-content">
+
+    <span
+      class="service-dialog-number"
+      id="dialogNumber"
+    >
+      01 — SERVICE
+    </span>
+
+    <h2
+      class="service-dialog-title"
+      id="dialogTitle"
+    >
+      Social Media Design
+    </h2>
+
+    <p
+      class="service-dialog-description"
+      id="dialogDescription"
+    >
+      Eye-catching posts, stories, covers, and templates tailored
+      for your brand voice across all platforms.
+    </p>
+
+    <a href="#contact" class="service-dialog-link">
+      Let's work together →
+    </a>
+
+  </div>
+
+</div>
+</div>
 </body>
 
 </html>

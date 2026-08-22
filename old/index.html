@@ -33,7 +33,7 @@ form-action 'self';
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <script src="script.js" defer></script>
+  <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -51,7 +51,7 @@ form-action 'self';
   <!-- NAVIGATION -->
   <nav class="nav" id="mainNav">
     <div class="nav-inner">
-      <a href="#home" class="nav-logo" aria-label="Digital ZN Home">
+      <a href="#hero" class="nav-logo" aria-label="Digital ZN Home">
         <img src="assets/logo.png" alt="Digital ZN" class="nav-logo-img" />
       </a>
       <div class="nav-links" id="navLinks">
@@ -66,7 +66,19 @@ form-action 'self';
           <button class="lang-btn" data-lang="ar">AR</button>
           <button class="lang-btn" data-lang="fr">FR</button>
         </div>
-        <a href="#contact" class="nav-cta" data-i18n="nav_cta">Contact</a>
+        <a href="#contact" class="nav-cta">
+    <span class="nav-cta-text" data-i18n="nav_cta">Contact</span>
+
+    <svg
+        class="nav-cta-arrow"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        focusable="false"
+    >
+        <path d="M5 19L19 5" />
+        <path d="M8 5H19V16" />
+    </svg>
+</a>
         <button class="hamburger" id="hamburger" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
@@ -90,6 +102,7 @@ form-action 'self';
       <source src="assets/velaris.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
+    
     <div class="hero-inner">
       <div class="hero-content">
         <h1 class="hero-title reveal-up">
@@ -102,7 +115,16 @@ form-action 'self';
           <a href="#contact" class="btn-primary" data-i18n="hero_cta1">Start Your Journey</a>
           <a href="#portfolio" class="btn-ghost" data-i18n="hero_cta2">See Our Portfolio</a>
         </div>
+        
       </div>
+      <div class="right-side">
+
+    <div class="hero-device">
+
+        <div class="hero-device-glow"></div>
+
+        <img class="hero-device-video" src="assets/finaaaaal .gif">
+    </div>
     </div>
 
   </section>
@@ -130,47 +152,60 @@ form-action 'self';
         </p>
       </div>
       <div class="services-grid">
-        <div class="service-card reveal-up">
-          <div class="service-icon"><img src="assets/icons/socual.png" alt=""></div>
-          <h3 class="service-name" data-i18n="srv1_name">Social Media Design</h3>
-          <p class="service-desc" data-i18n="srv1_desc">Eye-catching posts, stories, covers, and templates tailored for
-            your brand voice across all platforms.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
-        </div>
-        <div class="service-card reveal-up">
+        <div class="service-card reveal-up" data-service="1">
+
+  <div class="service-icon">
+    <img src="assets/icons/socual.png" alt="">
+  </div>
+
+  <h3 class="service-name" data-i18n="srv1_name">
+    Social Media Design
+  </h3>
+
+  <p class="service-desc" data-i18n="srv1_desc">
+    Eye-catching posts, stories, covers, and templates tailored for
+    your brand voice across all platforms.
+  </p>
+
+  <button class="service-expand" type="button" aria-label="Open service">
+    <span>+</span>
+  </button>
+
+</div>
+        <div class="service-card reveal-up" data-service="2">
           <div class="service-icon"><img src="assets/icons/graphic-01.png" alt=""></div>
           <h3 class="service-name" data-i18n="srv2_name">Graphic Design</h3>
           <p class="service-desc" data-i18n="srv2_desc">Print-on-demand, books, roll-ups, brochures, animated PowerPoint
             presentations, and more.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
+        <div class="service-card reveal-up" data-service="3">
           <div class="service-icon"><img src="assets/icons/diam-01.png" alt=""></div>
           <h3 class="service-name" data-i18n="srv3_name">Brand Identity</h3>
           <p class="service-desc" data-i18n="srv3_desc">Full brand systems — concept, logo, color palette, typography,
             mockups, and brand guidelines.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
+        <div class="service-card reveal-up" data-service="4">
           <div class="service-icon"><img src="assets/icons/web-01.png" alt=""></div>
           <h3 class="service-name" data-i18n="srv4_name">Landing Pages</h3>
           <p class="service-desc" data-i18n="srv4_desc">High-converting landing pages built with HTML, CSS & JavaScript
             — clean, fast, and responsive.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
+        <div class="service-card reveal-up" data-service="5">
           <div class="service-icon"><img src="assets/icons/play-01.png" alt=""></div>
           <h3 class="service-name" data-i18n="srv5_name">Video Editing</h3>
           <p class="service-desc" data-i18n="srv5_desc">Professional video editing for reels, ads, and promotional
             content that captivates your audience.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
-        <div class="service-card reveal-up">
+        <div class="service-card reveal-up" data-service="6">
           <div class="service-icon"><img src="assets/icons/Untitled-1-01.png" alt=""></div>
           <h3 class="service-name" data-i18n="srv6_name">Videography</h3>
           <p class="service-desc" data-i18n="srv6_desc">Photography and videography sessions to produce stunning visual
             content for your brand.</p>
-          <a href="#contact" class="service-link" data-i18n="srv_link">Learn more →</a>
+          <button class="service-expand" type="button" aria-label="Open service"><span>+</span></button>
         </div>
       </div>
     </div>
@@ -247,7 +282,7 @@ form-action 'self';
   </section>
 
   <!-- SECTION 04 — ABOUT -->
-  <section id="about" class="section-about section-dark">
+  <section id="about" class="section-abouts section-dark">
     <div class="section-inner">
       
       <div class="about-grid">
@@ -260,7 +295,16 @@ form-action 'self';
             turning visions into viral moments.</p>
           <blockquote class="about-quote reveal-up" data-i18n="ab_quote">"Our vision is simple: to lead the feed
             wherever our clients are present."</blockquote>
+                              <div class="about-text-loop reveal-up" aria-label="What defines Digital ZN">
+            <span class="about-loop-item">Creative Excellence</span>
+            <span class="about-loop-item">Data-Driven Results</span>
+            <span class="about-loop-item">Cultural Intelligence</span>
+            <span class="about-loop-item">Speed to Market</span>
+            <span class="about-loop-item">Transparent Partnership</span>
+            <span class="about-loop-item">Measurable ROI</span>
+          </div>
         </div>
+
         <div class="about-right">
           <div class="about-visual reveal-up">
             <img src="assets/sehsucht.gif" alt="" aria-hidden="false" class="about-gif" />
@@ -269,71 +313,6 @@ form-action 'self';
       </div>
     </div>
   </section>
-
-  <div class="team-slider">
-    <div class="slider-track">
-
-      <!-- Original Cards -->
-
-      <div class="card">
-        <div>
-          <span class="pillar-num">01</span>
-          <h3>Creative Excellence</h3>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="pillar-num">02</span>
-          <h3>Data-Driven Results</h3>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="pillar-num">03</span>
-          <h3>Cultural Intelligence</h3>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="pillar-num">04</span>
-          <h3>Speed to Market</h3>
-        </div>
-      </div>
-
-      <!-- Duplicate -->
-      <div class="card">
-        <div>
-          <span class="pillar-num">05</span>
-          <h3>Transparent Partnership</h3>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="pillar-num">06</span>
-          <h3>Measurable ROI</h3>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="pillar-num">01</span>
-          <h3>Creative Excellence</h3>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <span class="pillar-num">02</span>
-          <h3>Data-Driven Results</h3>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
   <!-- SECTION 05 — CONTACT -->
   <section id="contact" class="section-contact section-cream">
@@ -417,7 +396,7 @@ form-action 'self';
             <div class="form-error" id="formError" aria-live="polite"></div>
             <button type="submit" class="btn-submit" id="submitBtn">
               <span id="submitLabel" data-i18n="form_send">Send Message</span>
-              <img src="assets/icons/send-01-01.png" alt="" aria-hidden="true" />
+              <img src="assets/icons/send-01-01.png" alt="" aria-hidden="true">
             </button>
           </form>
           <div class="form-success" id="formSuccess" style="display:none">
@@ -513,6 +492,58 @@ form-action 'self';
 
   </div>
 </footer>
+<!-- SERVICE MORPH DIALOG -->
+<div class="service-dialog" id="serviceDialog" aria-hidden="true">
+
+  <div class="service-dialog-backdrop"></div>
+
+<div class="service-dialog-container">
+
+  <button
+    class="service-dialog-close"
+    id="serviceDialogClose"
+    type="button"
+    aria-label="Close service"
+  >
+    ×
+  </button>
+
+  <!-- BIG IMAGE -->
+  <div class="service-dialog-image" id="dialogImage"></div>
+
+  <!-- CONTENT -->
+  <div class="service-dialog-content">
+
+    <span
+      class="service-dialog-number"
+      id="dialogNumber"
+    >
+      01 — SERVICE
+    </span>
+
+    <h2
+      class="service-dialog-title"
+      id="dialogTitle"
+    >
+      Social Media Design
+    </h2>
+
+    <p
+      class="service-dialog-description"
+      id="dialogDescription"
+    >
+      Eye-catching posts, stories, covers, and templates tailored
+      for your brand voice across all platforms.
+    </p>
+
+    <a href="#contact" class="service-dialog-link">
+      Let's work together →
+    </a>
+
+  </div>
+
+</div>
+</div>
 </body>
 
 </html>
