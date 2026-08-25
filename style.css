@@ -1,5 +1,5 @@
 /* ============================================
-   CSS CUSTOM PROPERTIES — THEME TOKENS
+   CSS CUSTOM PROPERTIES — THEME TOKENS -- salam
 ============================================ */
 :root {
   --dark-bg:        #0e0d1a;
@@ -62,7 +62,6 @@ body {
 }
 
 
-/* RTL support */
 [dir="rtl"] .nav-inner,
 [dir="rtl"] .nav-links,
 [dir="rtl"] .nav-controls { direction: rtl; }
@@ -146,17 +145,14 @@ body {
 }
 
 .nav-inner {
-  position: relative; z-index: 1;   /* sits above ::before, never masked */
+  position: relative; z-index: 1;   
   max-width: 1300px; margin: auto;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 20px;
 }
-/* Explicit column placement: without this, hiding .nav-links below 900px
-   (display:none) removes it from the grid item list, so auto-placement
-   shoves .nav-controls into the empty middle track instead of the right
-   one — the controls drift toward center instead of staying flush right. */
+
 .nav-logo    { grid-column: 1; }
 .nav-links   { grid-column: 2; }
 .nav-controls{ grid-column: 3; }
@@ -284,25 +280,21 @@ body {
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Grid 0fr → 1fr trick instead of max-height: iOS Safari is known to
-   silently fail to repaint max-height transitions on flex containers,
-   which is why the menu wasn't appearing on phones. Grid row sizing
-   doesn't have that bug and animates reliably everywhere. */
+
 .mobile-menu {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.4s ease, border-color 0.4s, background 0.4s;
-  background: transparent;   /* only painted when open — a closed 0fr row can still
-                                 leave a sub-pixel sliver, and a transparent one is invisible */
+  background: transparent; 
   border-top: 1px solid transparent;
 }
 .mobile-menu.open {
   grid-template-rows: 1fr;
   background: var(--dark-bg);
-  border-top-color: var(--dark-border); /* only shows when opened */
+  border-top-color: var(--dark-border);
 }
 .mobile-menu-inner {
-  overflow: hidden;          /* required for the grid-rows trick to clip content */
+  overflow: hidden;     
   display: flex; flex-direction: column;
   min-height: 0;
 }
@@ -400,28 +392,9 @@ body {
   cursor: grab;
   touch-action: pan-y;
 }
-/* The 500px wrapper above is sized for desktop/tablet's much larger cards.
-   On mobile the card is only min(62vw,250px) wide (~227px tall at 11:10),
-   so the fixed 500px box left huge dead space above/below it — read as a
-   big gap under the "01 — Some of our latest work" label and cards that
-   looked tiny. Shrinking the wrapper to track the card's own height lets
-   .section-showcase's existing justify-content:center actually center the
-   label+carousel+hint block in the viewport instead of stranding it under
-   a mostly-empty box. */
 @media (max-width: 767px) {
   .carousel-wrapper { height: min(68vw, 280px); }
 }
-/* iOS Safari's compositor corrupts colors when too many large,
-   overlapping preserve-3d layers sit under a very high perspective —
-   that's the red/purple banding you saw. Dropping perspective on small
-   screens, in proportion to the smaller carousel radius used there
-   (see getCarouselRadius in script.js), keeps the same visual tilt at a
-   scale iOS composites correctly. (Was mistakenly "500cm" ≈ 18,898px —
-   flatter than the 7000px desktop value, not sharper — which collapsed
-   the whole fan-out into a near-flat stack.)
-   Breakpoint is 899px, not 767px, to match getCarouselRadius()'s own
-   `width < 900` tier — below that the JS radius drops to 390px and the
-   desktop's 7000px perspective is too flat for it. */
 @media (max-width: 899px) {
   .carousel-wrapper { perspective: 2600px; }
 }
@@ -442,35 +415,18 @@ body {
   aspect-ratio: 11 / 10;
   transform-style: preserve-3d;
   transform-origin: center center;
-  backface-visibility: hidden;      /* stops iOS from compositing hidden backfaces */
+  backface-visibility: hidden;      
   -webkit-backface-visibility: hidden;
   transition:
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.5s ease;
 }
-/* Card width is kept at ~1.85x smaller than getCarouselRadius()'s current
-   tier — the same radius:card-width ratio the desktop layout uses (850px
-   radius / 460px card, "else" tier below) — so side cards clear the front
-   card by the same proportion at every breakpoint instead of overlapping
-   it. Tiers mirror getCarouselRadius() exactly: <768px (min(115.2vw,464px)
-   radius), 768-899px (fixed 390px radius), >=900px (fixed 850px radius,
-   the unmodified 460px default below). Previously this was a flat 460px
-   on every screen below 1024px — wider than the phone itself on mobile,
-   and disproportionately wide next to the small tablet-tier radius. Mobile
-   tier widened from <520 to <768 (and card size raised from min(42vw,178px))
-   so cards fill more of the screen on phones, matching the 767px mobile
-   breakpoint used elsewhere on the site — tablet's own 768-899 tier is
-   unchanged. */
 @media (max-width: 767px) {
   .card-wrapper { width: min(62vw, 250px); }
 }
 @media (min-width: 768px) and (max-width: 899px) {
   .card-wrapper { width: 211px; }
 }
-/* Always fills the wrapper above instead of its own breakpoints, which
-   used to fall out of step with .card-wrapper's width (e.g. a 340px inner
-   image sitting inside a 460px tablet wrapper, left-aligned with an empty
-   gutter down one side). */
 .card-inner {
   width: 100%;
   height: 100%;
@@ -532,10 +488,6 @@ body {
 }
 
 /* ============================================
-   HERO SECTION
-============================================ */
-
-/* ============================================
    HERO — SPLIT LAYOUT
 ============================================ */
 
@@ -550,7 +502,7 @@ body {
   justify-content: center;
 }
 
-/* Background video */
+
 .hero-bg-video {
   position: absolute;
   inset: 0;
@@ -562,7 +514,7 @@ body {
   pointer-events: none;
 }
 
-/* Dark overlay ONLY */
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -585,7 +537,6 @@ body {
   pointer-events: none;
 }
 
-/* Main 2-column container */
 .hero-inner {
   position: relative;
   z-index: 2;
@@ -604,7 +555,7 @@ body {
   text-align: left;
 }
 
-/* LEFT SIDE */
+
 .left-side {
   width: 100%;
   display: flex;
@@ -618,7 +569,7 @@ body {
 padding-left:80px;
 }
 
-/* RIGHT SIDE */
+
 .right-side {
   width: 100%;
   min-height: 500px;
@@ -630,7 +581,7 @@ padding-left:80px;
   position: relative;
 }
 
-/* Title */
+
 .hero-title {
   font-size: clamp(3.5rem, 7vw, 7rem);
   font-weight: 750;
@@ -663,7 +614,7 @@ padding-left:80px;
         drop-shadow(0 0 28px rgba(106,92,255,0.10));
 }
 
-/* Description */
+
 .hero-sub {
   font-size: 1.1rem;
   color: var(--fg-dark-muted);
@@ -672,7 +623,7 @@ padding-left:80px;
   margin: 0 0 2.5rem;
 }
 
-/* Buttons */
+
 .hero-cta {
   display: flex;
   gap: 0.85rem;
@@ -695,7 +646,6 @@ padding-left:80px;
     height: auto;
     display: block;
     object-fit: contain;
-    /* Makes black areas merge with the dark hero */
     mix-blend-mode: screen;
         transform:
         translateZ(40px)
@@ -848,6 +798,8 @@ padding-left:80px;
   border-radius: 1.25rem; padding: 2rem;
   transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
   display: flex; flex-direction: column; gap: 0.85rem;
+
+  cursor: pointer;
 }
 [data-theme="light"] .service-card { background: var(--cream-2); border-color: rgba(20,18,27,0.08); }
 .service-card:hover {
@@ -880,7 +832,6 @@ padding-left:80px;
     border-color 0.35s ease;
 }
 
-/* subtle moving glow inside card */
 .service-card::before {
   content: "";
   position: absolute;
@@ -901,13 +852,13 @@ padding-left:80px;
   transform: scale(1);
 }
 
-/* keep content above glow */
+
 .service-card > * {
   position: relative;
   z-index: 2;
 }
 
-/* plus button */
+
 
 .service-expand {
   position: absolute;
@@ -1029,7 +980,6 @@ padding-left:80px;
 }
 
 
-/* animated purple glow */
 
 .service-dialog-container::before {
   content: "";
@@ -1111,12 +1061,10 @@ padding-left:80px;
     background 0.3s ease;
 }
 
-/* IMAGE */
 
 .service-dialog-image {
   width: 100%;
   height: 360px;
-
   overflow: hidden;
 
   background: #ddd;
@@ -1126,9 +1074,6 @@ padding-left:80px;
 .service-dialog-image img {
   width: 100%;
   height: 100%;
-
-  /* For large service artwork/photos use cover.
-     For an icon/logo, change to object-fit: contain. */
   object-fit: cover;
 
   display: block;
@@ -1158,7 +1103,6 @@ padding-left:80px;
 
   border-radius: 18px;
 
-  background: rgba(106, 92, 255, 0.08);
 }
 
 .service-dialog-icon img {
@@ -1187,7 +1131,7 @@ padding-left:80px;
   margin: 0 0 0.8rem;
 
   font-size: clamp(2rem, 5vw, 3rem);
-
+  color: #1A1410;
   line-height: 1.05;
 }
 
@@ -1227,7 +1171,6 @@ padding-left:80px;
 }
 
 
-/* prevent page scrolling while dialog is open */
 
 body.service-dialog-open {
   overflow: hidden;
@@ -1292,7 +1235,6 @@ body.service-dialog-open {
   }
 }
 
-/* accessibility */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1430,9 +1372,6 @@ body.service-dialog-open {
   -webkit-backface-visibility: hidden;
   filter: blur(3px);
 
-  /* 15s total = 2.5s per item.
-     The visible phase ends before the next item begins,
-     so two blurred words never sit on top of each other. */
   animation: aboutLoop 9s cubic-bezier(0.99, 1, 0.99, 1) infinite;
   will-change: transform, opacity, filter;
 }
@@ -1456,7 +1395,7 @@ body.service-dialog-open {
 .about-loop-item:nth-child(6) { animation-delay: -7.5s; }
 
 @keyframes aboutLoop {
-  /* enter */
+  
   0% {
     opacity: 0;
     transform: translateY(14px) rotateX(-55deg);
@@ -1469,7 +1408,7 @@ body.service-dialog-open {
     filter: blur(0);
   }
 
-  /* hold */
+
   5%,
   12% {
     opacity: 1;
@@ -1477,7 +1416,7 @@ body.service-dialog-open {
     filter: blur(0);
   }
 
-  /* exit — finishes before the next item starts */
+ 
   20% {
     opacity: 0;
     transform: translateY(-14px) rotateX(55deg);

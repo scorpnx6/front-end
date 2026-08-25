@@ -615,6 +615,7 @@ body {
 .hero-content {
   max-width: 650px;
   text-align: left;
+padding-left:80px;
 }
 
 /* RIGHT SIDE */
@@ -654,12 +655,9 @@ body {
             #6A5CFF 45%,
             #7667FF 100%
         );
-
     -webkit-background-clip: text;
     background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
     filter:
         drop-shadow(0 10px 22px rgba(106,92,255,0.16))
         drop-shadow(0 0 28px rgba(106,92,255,0.10));
@@ -670,9 +668,7 @@ body {
   font-size: 1.1rem;
   color: var(--fg-dark-muted);
   line-height: 1.75;
-
   max-width: 32rem;
-
   margin: 0 0 2.5rem;
 }
 
@@ -686,49 +682,35 @@ body {
 
 .hero-device {
     position: relative;
-
     width: min(780px, 55vw);
-
     transform: translateX(-5vw);
-
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 .hero-device-video {
     position: relative;
     z-index: 2;
-
     width: 100%;
     height: auto;
-
     display: block;
     object-fit: contain;
-
     /* Makes black areas merge with the dark hero */
     mix-blend-mode: screen;
         transform:
         translateZ(40px)
         rotateY(-3deg)
         rotateX(1deg);
-
     transform-style: preserve-3d;
 }
-
-
-
 @keyframes heroFloat {
   0%, 100% {
     transform: translateY(0);
   }
-
   50% {
     transform: translateY(-12px);
   }
 }
-
-
 /* ============================================
    HERO — MOBILE
 ============================================ */
@@ -772,24 +754,12 @@ body {
     max-width: 600px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 .btn-primary {
   background: var(--purple); color: #fff; border: none; border-radius: 100px;
   padding: 0.9rem 2.2rem; font-family: 'Space Grotesk', sans-serif;
   font-size: 0.95rem; font-weight: 600; transition: background 0.2s, transform 0.2s; display: inline-block;
 }
 .btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); }
-
 .btn-ghost {
   color: var(--fg-dark);
   border: 2px solid transparent; border-radius: 50px;
@@ -893,13 +863,16 @@ body {
 }
 .service-desc { font-size: 0.9rem; color: var(--fg-light-muted); line-height: 1.65; flex: 1; }
 /* ============================================
-   SERVICE MORPHING DIALOG — TRUE CARD MORPH
+   SERVICE MORPHING DIALOG
 ============================================ */
+
 .service-card {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+
   cursor: pointer;
+
   transition:
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -907,56 +880,81 @@ body {
     border-color 0.35s ease;
 }
 
+/* subtle moving glow inside card */
 .service-card::before {
-  content: none !important;
+  content: "";
+  position: absolute;
+  inset: -40%;
+
+  opacity: 0;
+  transform: scale(0.7);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.service-card:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* keep content above glow */
 .service-card > * {
   position: relative;
   z-index: 2;
 }
 
-.service-card:hover {
-  background: var(--cream-2);
-  border-color: var(--cream-border);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.06);
-}
+/* plus button */
 
 .service-expand {
   position: absolute;
+
   top: 1.25rem;
   right: 1.25rem;
+
   width: 38px;
   height: 38px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 50%;
-  border: 1px solid rgba(26,20,16,0.12);
-  background: rgba(255,255,255,0.55);
+
+  border: 1px solid rgba(26, 20, 16, 0.12);
+  background: rgba(255, 255, 255, 0.45);
+
   color: var(--fg-light);
+
   font-size: 1.4rem;
   font-weight: 300;
+
   cursor: pointer;
-  z-index: 4;
+
   transition:
-    transform 0.4s cubic-bezier(0.22,1,0.36,1),
-    background 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease;
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .service-expand span {
   display: block;
+
   line-height: 1;
-  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .service-card:hover .service-expand {
   background: var(--purple);
-  color: #fff;
+  color: white;
   border-color: var(--purple);
+
   transform: scale(1.08);
 }
 
@@ -964,191 +962,263 @@ body {
   transform: rotate(90deg);
 }
 
-/* Hide the original card only while its matching dialog is open. */
-.service-card.service-morph-source {
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
+
+/* ============================================
+   BACKDROP
+============================================ */
 
 .service-dialog {
   position: fixed;
   inset: 0;
+
   z-index: 9000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+
   visibility: hidden;
   pointer-events: none;
-  overflow: hidden;
 }
+
+.service-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(8, 8, 19, 0.55);
+
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+
+  opacity: 0;
+
+  transition:
+    opacity 0.45s ease,
+    backdrop-filter 0.55s ease,
+    -webkit-backdrop-filter 0.55s ease;
+}
+
+
+/* ============================================
+   DIALOG
+============================================ */
+
+.service-dialog-container {
+  position: relative;
+
+  width: min(620px, 92vw);
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: var(--cream-bg);
+
+  box-shadow:
+    0 40px 100px rgba(8, 8, 19, 0.3);
+
+  opacity: 0;
+
+  transform: scale(0.72);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* animated purple glow */
+
+.service-dialog-container::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  top: -220px;
+  right: -180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(106, 92, 255, 0.18),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+
+/* ============================================
+   OPEN STATE
+============================================ */
 
 .service-dialog.open {
   visibility: visible;
   pointer-events: auto;
 }
 
-.service-dialog-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(8,8,19,0.58);
-  opacity: 0;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  transition:
-    opacity 0.32s ease,
-    backdrop-filter 0.38s ease,
-    -webkit-backdrop-filter 0.38s ease;
-}
-
 .service-dialog.open .service-dialog-backdrop {
   opacity: 1;
+
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
 
-.service-dialog-container {
-  position: fixed;
-  z-index: 2;
-  left: var(--morph-from-x, 50vw);
-  top: var(--morph-from-y, 50vh);
-  width: var(--morph-from-w, 320px);
-  height: var(--morph-from-h, 300px);
-  overflow: hidden;
-  border-radius: var(--morph-from-radius, 20px);
-  background: var(--cream-bg);
-  color: var(--fg-light);
-  box-shadow: 0 40px 100px rgba(8,8,19,0.30);
-  opacity: 0;
-  transform: none;
-  transition:
-    left 0.42s cubic-bezier(0.22,1,0.36,1),
-    top 0.42s cubic-bezier(0.22,1,0.36,1),
-    width 0.42s cubic-bezier(0.22,1,0.36,1),
-    height 0.42s cubic-bezier(0.22,1,0.36,1),
-    border-radius 0.42s cubic-bezier(0.22,1,0.36,1),
-    opacity 0.25s ease;
+.service-dialog.open .service-dialog-container {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.service-dialog.open .service-dialog-container {
-  left: var(--morph-to-x);
-  top: var(--morph-to-y);
-  width: var(--morph-to-w);
-  height: var(--morph-to-h);
-  border-radius: 28px;
-  opacity: 1;
+/* ============================================
+   DIALOG CONTENT
+============================================ */
+
+.service-dialog-close {
+  position: absolute;
+
+  top: 1.25rem;
+  right: 1.25rem;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(26, 20, 16, 0.12);
+
+  background: rgba(255, 255, 255, 0.5);
+
+  color: var(--fg-light);
+
+  font-size: 1.6rem;
+  font-weight: 300;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
 }
+
+/* IMAGE */
 
 .service-dialog-image {
-  position: relative;
   width: 100%;
-  height: 54%;
-  min-height: 250px;
+  height: 360px;
+
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 40%, rgba(106,92,255,0.08), transparent 62%),
-    #dedbd6;
+
+  background: #ddd;
 }
+
 
 .service-dialog-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 3.5rem;
+
+  /* For large service artwork/photos use cover.
+     For an icon/logo, change to object-fit: contain. */
+  object-fit: cover;
+
   display: block;
-  transform: scale(0.82);
-  opacity: 0;
-  transition:
-    transform 0.7s cubic-bezier(0.22,1,0.36,1) 0.18s,
-    opacity 0.4s ease 0.15s;
 }
 
-.service-dialog.open .service-dialog-image img {
-  transform: scale(1);
-  opacity: 1;
+
+.service-dialog-close:hover {
+  transform: rotate(90deg);
+
+  background: var(--purple);
+
+  color: white;
+}
+.service-dialog-content {
+  padding: 2rem 2rem 2.5rem;
 }
 
-.service-dialog-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, transparent 65%, rgba(0,0,0,0.08));
-}
+.service-dialog-icon {
+  width: 70px;
+  height: 70px;
 
-.service-dialog-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
-  width: 42px;
-  height: 42px;
+  margin-bottom: 2rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.55);
-  border-radius: 50%;
-  background: rgba(20,18,27,0.42);
-  color: #fff;
-  font-size: 1.6rem;
-  font-weight: 300;
-  line-height: 1;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, background 0.3s ease;
+
+  border-radius: 18px;
+
+  background: rgba(106, 92, 255, 0.08);
 }
 
-.service-dialog-close:hover {
-  transform: rotate(90deg) scale(1.04);
-  background: var(--purple);
-}
+.service-dialog-icon img {
+  width: 42px;
+  height: 42px;
 
-.service-dialog-content {
-  height: 46%;
-  min-height: 260px;
-  overflow-y: auto;
-  padding: 1.65rem 2rem 2rem;
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.35s ease 0.22s,
-    transform 0.42s cubic-bezier(0.22,1,0.36,1) 0.22s;
-}
-
-.service-dialog.open .service-dialog-content {
-  opacity: 1;
-  transform: translateY(0);
+  object-fit: contain;
 }
 
 .service-dialog-number {
   display: block;
-  margin-bottom: 0.55rem;
+
+  margin-bottom: 0.6rem;
+
   color: var(--purple);
-  font-size: 0.72rem;
+
+  font-size: 0.75rem;
   font-weight: 700;
+
   letter-spacing: 0.14em;
-  text-transform: uppercase;
 }
+
+
 
 .service-dialog-title {
   margin: 0 0 0.8rem;
+
   font-size: clamp(2rem, 5vw, 3rem);
+  color: #1A1410;
   line-height: 1.05;
-  letter-spacing: -0.025em;
 }
+
+
 
 .service-dialog-description {
   margin: 0;
-  max-width: 540px;
+
   color: var(--fg-light-muted);
+
   line-height: 1.7;
 }
+
+
+.service-dialog-footer {
+  margin-top: 2.5rem;
+}
+
 
 .service-dialog-link {
   display: inline-flex;
   align-items: center;
-  margin-top: 1.5rem;
+
   color: var(--purple);
+
   font-size: 0.9rem;
   font-weight: 600;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .service-dialog-link:hover {
@@ -1156,44 +1226,82 @@ body {
   opacity: 0.75;
 }
 
+
+/* prevent page scrolling while dialog is open */
+
 body.service-dialog-open {
   overflow: hidden;
 }
+/* ============================================
+   RTL — SERVICES
+============================================ */
+
+[dir="rtl"] .service-card {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .service-expand {
+  right: auto;
+  left: 1.25rem;
+}
+
+[dir="rtl"] .service-icon {
+  align-self: flex-start;
+}
+
+/* ============================================
+   MOBILE
+============================================ */
 
 @media (max-width: 600px) {
+
+  .service-dialog {
+    padding: 1rem;
+  }
+
   .service-dialog-container {
-    border-radius: 22px;
+    width: 100%;
+    min-height: 390px;
+
+    padding: 2rem 1.5rem;
+
+    border-radius: 24px;
   }
-  .service-dialog-image {
-    height: 45%;
-    min-height: 210px;
-  }
-  .service-dialog-image img {
-    padding: 2.5rem;
-  }
-  .service-dialog-content {
-    height: 55%;
-    padding: 1.4rem 1.4rem 1.75rem;
-  }
+
   .service-dialog-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
+
+  .service-dialog-description {
+    font-size: 0.9rem;
+  }
+
   .service-expand {
     width: 34px;
     height: 34px;
+
     top: 1rem;
     right: 1rem;
   }
 }
+@media (max-width: 600px) {
+  [dir="rtl"] .service-expand {
+    right: auto;
+    left: 1rem;
+  }
+}
+
+/* accessibility */
 
 @media (prefers-reduced-motion: reduce) {
+
   .service-card,
+  .service-card::before,
   .service-expand,
   .service-expand span,
   .service-dialog-container,
-  .service-dialog-backdrop,
-  .service-dialog-image img,
-  .service-dialog-content {
+  .service-dialog-backdrop {
     transition: none !important;
   }
 }

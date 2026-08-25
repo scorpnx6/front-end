@@ -48,6 +48,19 @@ const LANG = {
     srv6_name:     'Videography',
     srv6_desc:     'Photography and videography sessions to produce stunning visual content for your brand.',
     srv_link:      'Learn more →',
+    srv1_dialog_title: 'Social Media Design — Strategy & Content',
+    srv1_dialog_desc: 'We create scroll-stopping social content systems tailored to your brand voice, including campaign concepts, post designs, stories, templates, and platform-ready creative direction.',
+    srv2_dialog_title: 'Graphic Design — Visual Systems',
+    srv2_dialog_desc: 'From editorial and print design to presentations and campaign assets, we build clear visual systems that keep every brand touchpoint consistent and memorable.',
+    srv3_dialog_title: 'Brand Identity — Build the System',
+    srv3_dialog_desc: 'We turn your positioning into a complete visual identity: concept, logo direction, color, typography, mockups, and practical brand guidelines for everyday use.',
+    srv4_dialog_title: 'Landing Pages — Designed to Convert',
+    srv4_dialog_desc: 'We design and build focused landing experiences with strong hierarchy, responsive layouts, clear calls to action, and fast front-end performance.',
+    srv5_dialog_title: 'Video Editing — Story in Motion',
+    srv5_dialog_desc: 'We shape raw footage into polished reels, ads, and promotional edits with rhythm, pacing, transitions, sound, and platform-specific finishing.',
+    srv6_dialog_title: 'Videography — Capture the Brand',
+    srv6_dialog_desc: 'We plan and shoot photography and video sessions that give your brand a strong visual library for campaigns, social content, products, and storytelling.',
+
     pf_label:      '03 — Portfolio',
     pf_title:      'Selected Portfolio',
     pf_sub:        'A glimpse of campaigns that made markets move. Click any item to view it.',
@@ -131,6 +144,19 @@ const LANG = {
     srv6_name:     'Vidéographie',
     srv6_desc:     'Séances photo et vidéo pour produire des contenus visuels époustouflants pour votre marque.',
     srv_link:      'En savoir plus →',
+    srv1_dialog_title: 'Design Réseaux Sociaux — Stratégie & Contenu',
+    srv1_dialog_desc: 'Nous créons des systèmes de contenu social qui attirent l’attention, adaptés à la voix de votre marque : concepts de campagnes, posts, stories, templates et direction créative.',
+    srv2_dialog_title: 'Design Graphique — Systèmes Visuels',
+    srv2_dialog_desc: 'De l’éditorial et de l’impression aux présentations et supports de campagne, nous construisons des systèmes visuels cohérents et mémorables.',
+    srv3_dialog_title: 'Identité de Marque — Construire le Système',
+    srv3_dialog_desc: 'Nous transformons votre positionnement en identité visuelle complète : concept, logo, couleurs, typographie, mockups et guidelines pratiques.',
+    srv4_dialog_title: 'Landing Pages — Pensées pour Convertir',
+    srv4_dialog_desc: 'Nous concevons et développons des landing pages ciblées avec une hiérarchie claire, des layouts responsives, des appels à l’action forts et de bonnes performances.',
+    srv5_dialog_title: 'Montage Vidéo — Le Storytelling en Mouvement',
+    srv5_dialog_desc: 'Nous transformons vos rushs en reels, publicités et contenus promotionnels soignés grâce au rythme, au sound design, aux transitions et au finishing.',
+    srv6_dialog_title: 'Vidéographie — Capturer la Marque',
+    srv6_dialog_desc: 'Nous préparons et réalisons des séances photo et vidéo pour créer une bibliothèque visuelle forte destinée aux campagnes, réseaux sociaux, produits et storytelling.',
+
     pf_label:      '03 — Portfolio',
     pf_title:      'Portfolio Sélectionné',
     pf_sub:        "Un aperçu des campagnes qui ont fait bouger les marchés. Cliquez pour voir.",
@@ -211,6 +237,19 @@ const LANG = {
     srv6_name:     'التصوير والفيديو',
     srv6_desc:     'جلسات تصوير فوتوغرافي وفيديو لإنتاج محتوى بصري مذهل لعلامتك التجارية.',
     srv_link:      'اعرف المزيد →',
+    srv1_dialog_title: 'تصميم وسائل التواصل — الاستراتيجية والمحتوى',
+    srv1_dialog_desc: 'نصنع أنظمة محتوى اجتماعي لافتة للنظر ومتكيفة مع هوية علامتك، من أفكار الحملات إلى المنشورات والقصص والقوالب والتوجيه الإبداعي.',
+    srv2_dialog_title: 'التصميم الجرافيكي — أنظمة بصرية',
+    srv2_dialog_desc: 'من التصميم التحريري والمطبوعات إلى العروض ومواد الحملات، نبني أنظمة بصرية متناسقة تجعل كل نقطة تواصل واضحة ولا تُنسى.',
+    srv3_dialog_title: 'هوية العلامة — بناء النظام',
+    srv3_dialog_desc: 'نحوّل تموضع علامتك إلى هوية بصرية متكاملة تشمل المفهوم واتجاه الشعار والألوان والخطوط والنماذج الإرشادية العملية.',
+    srv4_dialog_title: 'صفحات الهبوط — مصممة للتحويل',
+    srv4_dialog_desc: 'نصمم ونطور صفحات هبوط مركزة بهرمية واضحة وتخطيطات متجاوبة ودعوات فعل قوية وأداء سريع على الواجهة الأمامية.',
+    srv5_dialog_title: 'مونتاج الفيديو — القصة في حركة',
+    srv5_dialog_desc: 'نحوّل اللقطات الخام إلى ريلز وإعلانات ومحتوى ترويجي متقن من خلال الإيقاع والانتقالات والصوت واللمسات النهائية المناسبة لكل منصة.',
+    srv6_dialog_title: 'التصوير والفيديو — التقاط هوية العلامة',
+    srv6_dialog_desc: 'نخطط وننفذ جلسات تصوير فوتوغرافي وفيديو تمنح علامتك مكتبة بصرية قوية للحملات ومحتوى التواصل والمنتجات وسرد القصص.',
+
     pf_label:      '03 — أعمالنا',
     pf_title:      'أعمال مختارة',
     pf_sub:        'لمحة عن الحملات التي حركت الأسواق. انقر لمشاهدة أي عمل.',
@@ -797,117 +836,79 @@ function initSmoothScroll() {
 
 function initServiceMorph() {
   const dialog = document.getElementById('serviceDialog');
-  const container = dialog?.querySelector('.service-dialog-container');
   const closeBtn = document.getElementById('serviceDialogClose');
-  const backdrop = dialog?.querySelector('.service-dialog-backdrop');
   const dialogImage = document.getElementById('dialogImage');
   const dialogNumber = document.getElementById('dialogNumber');
   const dialogTitle = document.getElementById('dialogTitle');
   const dialogDescription = document.getElementById('dialogDescription');
   const cards = document.querySelectorAll('.service-card');
 
-  if (!dialog || !container || !closeBtn || !dialogImage || !cards.length) return;
+  if (!dialog || !closeBtn || !dialogImage || !dialogNumber ||
+      !dialogTitle || !dialogDescription || !cards.length) return;
 
   let activeCard = null;
-  let isClosing = false;
-
-  function setMorphRects(card) {
-    const from = card.getBoundingClientRect();
-
-    const isMobile = window.innerWidth <= 600;
-    const targetWidth = Math.min(isMobile ? window.innerWidth - 24 : 620, window.innerWidth - 24);
-    const targetHeight = Math.min(isMobile ? window.innerHeight - 24 : 720, window.innerHeight - 24);
-    const targetX = (window.innerWidth - targetWidth) / 2;
-    const targetY = (window.innerHeight - targetHeight) / 2;
-
-    container.style.setProperty('--morph-from-x', `${from.left}px`);
-    container.style.setProperty('--morph-from-y', `${from.top}px`);
-    container.style.setProperty('--morph-from-w', `${from.width}px`);
-    container.style.setProperty('--morph-from-h', `${from.height}px`);
-    container.style.setProperty('--morph-from-radius', getComputedStyle(card).borderRadius);
-
-    container.style.setProperty('--morph-to-x', `${targetX}px`);
-    container.style.setProperty('--morph-to-y', `${targetY}px`);
-    container.style.setProperty('--morph-to-w', `${targetWidth}px`);
-    container.style.setProperty('--morph-to-h', `${targetHeight}px`);
-  }
-
-  function openDialog(card, index) {
-    if (activeCard || isClosing) return;
-
-    const icon = card.querySelector('.service-icon img');
-    const title = card.querySelector('.service-name');
-    const description = card.querySelector('.service-desc');
-
-    if (!title || !description) return;
-
-    activeCard = card;
-    setMorphRects(card);
-
-    dialogTitle.textContent = title.textContent.trim();
-    dialogDescription.textContent = description.textContent.trim();
-    dialogNumber.textContent = `${String(index + 1).padStart(2, '0')} — SERVICE`;
-
-    dialogImage.innerHTML = '';
-    if (icon) {
-      const image = icon.cloneNode(true);
-      image.alt = title.textContent.trim();
-      dialogImage.appendChild(image);
-    }
-
-    card.classList.add('service-morph-source');
-    dialog.classList.add('open');
-    dialog.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('service-dialog-open');
-
-    requestAnimationFrame(() => closeBtn.focus());
-  }
-
-  function closeDialog() {
-    if (!activeCard || isClosing) return;
-
-    isClosing = true;
-    dialog.classList.remove('open');
-
-    const restoreCard = activeCard;
-    window.setTimeout(() => {
-      restoreCard.classList.remove('service-morph-source');
-      dialog.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('service-dialog-open');
-      dialogImage.innerHTML = '';
-      activeCard = null;
-      isClosing = false;
-    }, 390);
-  }
+  let closeTimer = null;
 
   cards.forEach((card, index) => {
-    let expandBtn = card.querySelector('.service-expand');
+    const expandBtn = card.querySelector('.service-expand');
+    if (!expandBtn) return;
 
-    if (!expandBtn) {
-      expandBtn = document.createElement('button');
-      expandBtn.type = 'button';
-      expandBtn.className = 'service-expand';
-      expandBtn.setAttribute('aria-label', 'Open service');
-      expandBtn.innerHTML = '<span>+</span>';
-      card.appendChild(expandBtn);
-    }
+    expandBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-    expandBtn.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      openDialog(card, index);
+      if (closeTimer) clearTimeout(closeTimer);
+
+      activeCard = card;
+
+      // ============================================================
+      // CHANGE EXPANDED IMAGE:
+      // edit data-dialog-image="assets/your-image.jpg" on the card
+      // ============================================================
+      const imageSrc = card.dataset.dialogImage ||
+        card.querySelector('.service-icon img')?.getAttribute('src');
+
+      if (imageSrc) {
+        dialogImage.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = imageSrc;
+        img.alt = '';
+        dialogImage.appendChild(img);
+      }
+
+      // Main card stays unchanged. Dialog content comes from its own keys.
+      const titleKey = card.dataset.dialogTitleKey;
+      const descKey = card.dataset.dialogDescKey;
+
+      dialogNumber.textContent = `${String(index + 1).padStart(2, '0')} — SERVICE`;
+      dialogTitle.textContent = titleKey ? t(titleKey) : '';
+      dialogDescription.textContent = descKey ? t(descKey) : '';
+
+      dialog.classList.add('open');
+      dialog.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('service-dialog-open');
+
+      requestAnimationFrame(() => closeBtn.focus());
     });
   });
 
+  function closeDialog() {
+    if (!dialog.classList.contains('open')) return;
+
+    dialog.classList.remove('open');
+    dialog.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('service-dialog-open');
+  }
+
   closeBtn.addEventListener('click', closeDialog);
-  backdrop?.addEventListener('click', closeDialog);
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && activeCard) closeDialog();
-  });
+  const backdrop = dialog.querySelector('.service-dialog-backdrop');
+  if (backdrop) backdrop.addEventListener('click', closeDialog);
 
-  window.addEventListener('resize', () => {
-    if (activeCard) setMorphRects(activeCard);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dialog.classList.contains('open')) {
+      closeDialog();
+    }
   });
 }
 
