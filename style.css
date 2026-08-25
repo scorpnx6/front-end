@@ -615,6 +615,7 @@ body {
 .hero-content {
   max-width: 650px;
   text-align: left;
+padding-left:80px;
 }
 
 /* RIGHT SIDE */
@@ -654,12 +655,9 @@ body {
             #6A5CFF 45%,
             #7667FF 100%
         );
-
     -webkit-background-clip: text;
     background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
     filter:
         drop-shadow(0 10px 22px rgba(106,92,255,0.16))
         drop-shadow(0 0 28px rgba(106,92,255,0.10));
@@ -670,9 +668,7 @@ body {
   font-size: 1.1rem;
   color: var(--fg-dark-muted);
   line-height: 1.75;
-
   max-width: 32rem;
-
   margin: 0 0 2.5rem;
 }
 
@@ -686,49 +682,35 @@ body {
 
 .hero-device {
     position: relative;
-
     width: min(780px, 55vw);
-
     transform: translateX(-5vw);
-
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 .hero-device-video {
     position: relative;
     z-index: 2;
-
     width: 100%;
     height: auto;
-
     display: block;
     object-fit: contain;
-
     /* Makes black areas merge with the dark hero */
     mix-blend-mode: screen;
         transform:
         translateZ(40px)
         rotateY(-3deg)
         rotateX(1deg);
-
     transform-style: preserve-3d;
 }
-
-
-
 @keyframes heroFloat {
   0%, 100% {
     transform: translateY(0);
   }
-
   50% {
     transform: translateY(-12px);
   }
 }
-
-
 /* ============================================
    HERO — MOBILE
 ============================================ */
@@ -772,24 +754,12 @@ body {
     max-width: 600px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 .btn-primary {
   background: var(--purple); color: #fff; border: none; border-radius: 100px;
   padding: 0.9rem 2.2rem; font-family: 'Space Grotesk', sans-serif;
   font-size: 0.95rem; font-weight: 600; transition: background 0.2s, transform 0.2s; display: inline-block;
 }
 .btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); }
-
 .btn-ghost {
   color: var(--fg-dark);
   border: 2px solid transparent; border-radius: 50px;
