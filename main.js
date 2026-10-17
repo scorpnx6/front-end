@@ -21,7 +21,7 @@ const LANG = {
     nav_portfolio: 'Portfolio',
     showcase_label: '01 — Some of our latest work',
     nav_about:     'About',
-    nav_cta:       'L\'ets Talk',
+    nav_cta:       'Let\'s Talk',
     scroll_hint:   'Scroll to explore',
     hero_badge:    'Digital Marketing Agency',
     hero_t1:       'WE LEAD',
