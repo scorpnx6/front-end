@@ -1,7 +1,5 @@
 /* ============================================
-   DIGITAL ZN — script.js
-   v2 — full i18n (EN/FR/AR), 3D carousel,
-   theme, form validation, scroll reveals
+   DIGITAL ZN v2 java script yeeey
 ============================================ */
 'use strict';
 
@@ -23,14 +21,14 @@ const LANG = {
     nav_portfolio: 'Portfolio',
     showcase_label: '01 — Some of our latest work',
     nav_about:     'About',
-    nav_cta:       'L\'ets Talk',
+    nav_cta:       'Let\'s Talk',
     scroll_hint:   'Scroll to explore',
     hero_badge:    'Digital Marketing Agency',
-    hero_t1:       'WE LEAD',
+    hero_t1:       'WE',
+    hero_tlead:    'LEAD',
     hero_t2:       'THE FEED',
-    hero_sub:      'Creative digital agency based in Morocco. We design, build, and film for brands that want to stand out.',
-    hero_cta1:     'Start Your Journey',
-    hero_cta2:     'See Our Portfolio',
+    hero_sub:      'Digital zn is a creative and performance digital agency turning attention into acquisition. social creative, influence, media performance and data intelligence working as one team, for growth minded brands with the autonomy to move fast.',
+    hero_cta1:     'START YOUR JOURNEY',
     reel_label:    'Showreel 2025',
     srv_label:     '02 — Services',
     srv_title:     'What We Do',
@@ -96,11 +94,9 @@ const LANG = {
     success_msg:   "We'll get back to you within 24 hours.",
     footer_tagline: '"We Lead The Feed"',
     footer_copy:   'All rights reserved.',
-    // Validation
     err_name:      'Please enter your name.',
     err_email:     'Please enter a valid email address.',
     err_msg:       'Please describe your project (at least 10 characters).',
-    // Carousel card captions
     card1_title: 'AI & Tech Branding',
     card1_cat:   'Brand Identity',
     card2_title: 'Beer Brand Campaign',
@@ -122,11 +118,11 @@ const LANG = {
     nav_cta:       'Parlons-en',
     scroll_hint:   'Défiler pour explorer',
     hero_badge:    'Agence de Marketing Digital',
-    hero_t1:       'NOUS MENONS',
+    hero_t1:       'NOUS',
+    hero_tlead:    'MENONS',
     hero_t2:       'LE FEED',
     hero_sub:      'Agence créative basée au Maroc. Nous concevons, développons et filmons pour les marques qui veulent se démarquer.',
-    hero_cta1:     'Commencer',
-    hero_cta2:     'Voir Notre Portfolio',
+    hero_cta1:     'COMMENCER',
     reel_label:    'Showreel 2025',
     srv_label:     '02 — Services',
     srv_title:     'Ce Que Nous Faisons',
@@ -215,11 +211,11 @@ const LANG = {
     nav_cta:       'تواصل معنا',
     scroll_hint:   'مرر للاستكشاف',
     hero_badge:    'وكالة تسويق رقمي',
-    hero_t1:       'نحن نقود',
+    hero_t1:       'نحن',
+    hero_tlead:    'نقود',
     hero_t2:       'المحتوى الرقمي',
     hero_sub:      'وكالة إبداعية رقمية مقرها المغرب. نصمم ونطور ونصور للعلامات التجارية التي تريد أن تتميز.',
     hero_cta1:     'ابدأ رحلتك',
-    hero_cta2:     'شاهد أعمالنا',
     reel_label:    'شريط الأعمال 2025',
     srv_label:     '02 — الخدمات',
     srv_title:     'ماذا نفعل',
@@ -347,32 +343,30 @@ function applyLang(lang) {
   currentLang = lang;
   localStorage.setItem('dzn_lang', lang);
 
-  // Update html lang + dir
+
   document.documentElement.lang = lang;
   document.documentElement.dir  = lang === 'ar' ? 'rtl' : 'ltr';
 
-  // data-i18n elements
+
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (t(key)) el.textContent = t(key);
   });
 
-  // placeholder
   document.querySelectorAll('[data-i18n-ph]').forEach(el => {
     const key = el.getAttribute('data-i18n-ph');
     if (t(key)) el.placeholder = t(key);
   });
 
-  // chips
   document.querySelectorAll('[data-i18n-chip]').forEach(el => {
     const key = el.getAttribute('data-i18n-chip');
     if (t(key)) el.textContent = t(key);
   });
 
-  // carousel card labels
+
   updateCarouselLang();
 
-  // Update active lang button
+
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === lang);
   });
@@ -398,7 +392,7 @@ window.addEventListener('scroll', () => {
 function initIntro() {
   const overlay = $('intro-overlay');
   if (!overlay) return;
-  // Hide after gif plays (2.4 s) + small buffer
+
   setTimeout(() => overlay.classList.add('hidden'), 2600);
 }
 
@@ -425,19 +419,18 @@ function initNav() {
   const burger = $('hamburger');
   const menu   = $('mobileMenu');
 
-  // Scroll state
+
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
     updateActiveLink();
   }, { passive: true });
 
-  // Hamburger
+
   burger && burger.addEventListener('click', () => {
     const open = burger.classList.toggle('open');
     menu.classList.toggle('open', open);
   });
 
-  // Close mobile menu on link click
   document.querySelectorAll('.mobile-link').forEach(link => {
     link.addEventListener('click', () => {
       burger.classList.remove('open');
@@ -454,7 +447,7 @@ function updateActiveLink() {
     const el = document.getElementById(id);
     if (el && el.offsetTop <= scrollY) current = id;
   });
-  // Map section id → nav href target
+
   const navMap = { hero: 'home', home: 'home' };
   const target = navMap[current] || current;
   document.querySelectorAll('.nav-link').forEach(link => {
@@ -471,12 +464,12 @@ function buildCarousel() {
   if (!scene) return;
 
   CARDS.forEach((card, i) => {
-    // Card wrapper
+
     const wrapper = document.createElement('div');
     wrapper.className = 'card-wrapper';
     wrapper.dataset.index = i;
 
-    // Inner
+
     const inner = document.createElement('div');
     inner.className = 'card-inner';
     inner.innerHTML = `
@@ -504,9 +497,6 @@ function normalizeAngle(angle) {
   return ((angle + 180) % 360 + 360) % 360 - 180;
 }
 
-// Caps how many 3D-transformed cards iOS has to composite at once —
-// fewer overlapping preserve-3d layers means less chance of the
-// color-corruption glitch, even with the lowered mobile perspective.
 const IS_TOUCH_DEVICE = window.matchMedia('(pointer: coarse)').matches
                       || window.innerWidth < 768;
 
@@ -518,8 +508,6 @@ function positionCircularCards() {
   let frontIndex = 0;
   let closest = Infinity;
 
-  // Find the card nearest the front before applying styles, so only one
-  // card receives the active state on every animation frame.
   wrappers.forEach((wrapper, i) => {
     const frontDistance = Math.abs(normalizeAngle(i * step + carouselAngle));
     if (frontDistance < closest) {
@@ -540,9 +528,6 @@ function positionCircularCards() {
     wrapper.style.opacity = opacity.toFixed(3);
     wrapper.style.transform =
       `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px) scale(${scale})`;
-
-    // On mobile, fully skip compositing cards facing well away from
-    // the front — caps simultaneous 3D layers and avoids the iOS glitch.
     wrapper.style.visibility = (IS_TOUCH_DEVICE && Math.abs(normalized) > 100)
       ? 'hidden' : 'visible';
   });
@@ -578,7 +563,6 @@ function attachCarouselEvents() {
   window.addEventListener('pointercancel', onDragEnd);
   window.addEventListener('resize', positionCircularCards);
 
-  // Click inactive card → navigate
   document.querySelectorAll('.card-wrapper').forEach(wrapper => {
     wrapper.addEventListener('click', () => {
       if (Math.abs(dragStartX - dragLastX) > 10) return;
@@ -647,7 +631,6 @@ function initReel() {
     pauseIcon.style.display = video.paused ? 'none'  : 'block';
   });
 
-  // Click anywhere on reel also toggles
   heroReel && heroReel.addEventListener('click', e => {
     if (e.target === btn || btn.contains(e.target)) return;
     btn.click();
@@ -682,7 +665,7 @@ function initScrollReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        // Stagger siblings
+
         const siblings = Array.from(entry.target.parentElement.querySelectorAll('.reveal-up'));
         const idx = siblings.indexOf(entry.target);
         setTimeout(() => entry.target.classList.add('visible'), idx * 80);
@@ -705,7 +688,7 @@ function initForm() {
   const success   = $('formSuccess');
   if (!form) return;
 
-  // Service chip selection
+
   document.querySelectorAll('#serviceChips .chip').forEach(chip => {
     chip.addEventListener('click', () => {
       chip.classList.toggle('selected');
@@ -742,7 +725,6 @@ function initForm() {
       return;
     }
 
-    // IMPORTANT: keep services as an ARRAY, exactly like the old working website.
     const services = Array.from(
       document.querySelectorAll('#serviceChips .chip.selected')
     ).map(chip => chip.dataset.val);
@@ -755,7 +737,7 @@ function initForm() {
     submitBtn.disabled = true;
     submitLbl.textContent = 'Sending...';
 
-    // EXACT payload shape used by the old working frontend.
+
     const payload = {
       name,
       email,
@@ -791,7 +773,6 @@ function initForm() {
     }
   });
 
-  // Clear invalid state on focus
   form.querySelectorAll('input, textarea').forEach(el => {
     el.addEventListener('focus', () => {
       el.classList.remove('invalid');
@@ -849,11 +830,12 @@ function initServiceMorph() {
   let activeCard = null;
   let closeTimer = null;
 
+
   cards.forEach((card, index) => {
     const expandBtn = card.querySelector('.service-expand');
     if (!expandBtn) return;
 
-    expandBtn.addEventListener('click', (e) => {
+    const openService = (e) => {
       e.preventDefault();
       e.stopPropagation();
 
@@ -861,10 +843,6 @@ function initServiceMorph() {
 
       activeCard = card;
 
-      // ============================================================
-      // CHANGE EXPANDED IMAGE:
-      // edit data-dialog-image="assets/your-image.jpg" on the card
-      // ============================================================
       const imageSrc = card.dataset.dialogImage ||
         card.querySelector('.service-icon img')?.getAttribute('src');
 
@@ -876,7 +854,7 @@ function initServiceMorph() {
         dialogImage.appendChild(img);
       }
 
-      // Main card stays unchanged. Dialog content comes from its own keys.
+
       const titleKey = card.dataset.dialogTitleKey;
       const descKey = card.dataset.dialogDescKey;
 
@@ -889,7 +867,11 @@ function initServiceMorph() {
       document.body.classList.add('service-dialog-open');
 
       requestAnimationFrame(() => closeBtn.focus());
-    });
+    };
+
+    card.addEventListener('click', openService);
+
+    expandBtn.addEventListener('click', openService);
   });
 
   function closeDialog() {
