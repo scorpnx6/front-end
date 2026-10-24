@@ -25,6 +25,7 @@
 /* ============================================
    scrool bar
 ============================================ */
+   @import url(https://fonts.googleapis.com/earlyaccess/lateef.css);
 html {
   background: transparent;
 }
@@ -654,10 +655,9 @@ body {
 .hero-sub {
   position: relative;
   z-index: 1;
-  width: min(100%, 42rem);
+  width: min(100%, 70rem);
   margin: 0;
   align-self: center;
-
   color: var(--fg-dark);
   font-size: clamp(1rem, 1.8vw, 1.2rem);
   line-height: 1.5;
@@ -667,6 +667,29 @@ body {
 
 html[lang="fr"] .hero-title {
   font-size: clamp(3.8rem, 13vw, 10rem);
+  
+}
+html[lang="ar"] .hero-title {
+  font-size: clamp(3.8rem, 13vw, 10rem);
+  font-family: 'Lateef', serif; 
+  
+  .hero-title-line {
+    gap: 0.5em;
+    white-space: normal;
+        width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    white-space: normal;
+  }
+    .hero-title-line--first,
+  .hero-title-line--second {
+    margin-inline-start: 0;
+    transform: none;
+  }
+  
+  }
+html[lang="ar"] .hero-sub {
+  text-align: center;
 }
 
 [dir="rtl"] .hero-title {
@@ -674,6 +697,7 @@ html[lang="fr"] .hero-title {
   line-height: 1;
   letter-spacing: 0;
 }
+
 
 [dir="rtl"] .hero-title-line--second {
   transform: none;
@@ -719,7 +743,11 @@ html[lang="fr"] .hero-title {
     padding-top: clamp(2rem, 5vh, 7.5rem);
     padding-bottom: clamp(2rem, 5vh, 2.75rem);
   }
+   html[lang="fr"] .hero-title {
+   font-size: clamp(4rem, 15vw, 8rem);
+   font-weight: 900px;
 
+  }
   .hero-inner {
     padding-inline: clamp(1rem, 5vw, 1.5rem);
   }
@@ -731,9 +759,10 @@ html[lang="fr"] .hero-title {
 
   .hero-title {
     margin-bottom: clamp(1.5rem, 5vh, 2.25rem);
-    font-size: clamp(3.7rem, 5vw, 5rem);
-    line-height: 0.9;
+    font-size: clamp(3.9rem, 7vw, 5rem);
+    line-height: 1;
     letter-spacing: -0.0em;
+  
 
   }
 
@@ -768,7 +797,7 @@ html[lang="fr"] .hero-title {
   }
 
   html[lang="fr"] .hero-title {
-    font-size: clamp(3rem, 10vw, 5rem);
+    font-size: clamp(2.5rem, 10vw, 8rem);
   }
 
   [dir="rtl"] .hero-content {
@@ -1771,7 +1800,7 @@ body.service-dialog-open {
 
   font-family: 'Jost', sans-serif;
 
-  font-size: clamp(8rem, 17vw, 18rem);
+  font-size: clamp(8rem, 15vw, 18rem);
 
   font-weight: 700;
 
@@ -1863,13 +1892,14 @@ body.service-dialog-open {
   }
 
   .footer-word-wrapper {
-    height: 145px;
-    margin-top: 3.5rem;
+    height: 130px;
+    margin-top: 0rem;
+    
   }
 
   .footer-word {
-    bottom: -18px;
-    font-size: 25vw;
+    bottom: -5px;
+    font-size: 18vw;
   }
 
 }

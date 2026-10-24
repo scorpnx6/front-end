@@ -31,6 +31,7 @@ const LANG = {
     hero_cta1:     'START YOUR JOURNEY',
     reel_label:    'Showreel 2025',
     srv_label:     '02 — Services',
+    srv_label2:    'Services',
     srv_title:     'What We Do',
     srv_sub:       'End-to-end digital solutions for brands that dare to lead.',
     srv1_name:     'Social Media Design',
@@ -74,12 +75,12 @@ const LANG = {
     ab_title:      'We Are Digital ZN',
     ab_body:       'Born in the digital age, Digital ZN is a full-service creative and digital marketing agency. We partner with ambitious brands to craft strategies that cut through the noise and lead the conversation. Our team of strategists, creators, and technologists work in sync — turning visions into viral moments.',
     ab_quote:      '"Our vision is simple: to lead the feed wherever our clients are present."',
-    p1: 'Creative Excellence',
-    p2: 'Data-Driven Results',
-    p3: 'Cultural Intelligence',
-    p4: 'Speed to Market',
-    p5: 'Transparent Partnership',
-    p6: 'Measurable ROI',
+    about_a1:      'Creative Excellence',
+    about_a2:      'Data-Driven Results',
+    about_a3:      'Cultural Intelligence',
+    about_a4:      'Speed to Market',
+    about_a5:      'Transparent Partnership',
+    about_a6:      'Measurable ROI',
     ct_label:      '05 — Contact',
     ct_title:      "Let's Build Something Great",
     ct_sub:        'Ready to lead the feed? Tell us about your project.',
@@ -107,6 +108,11 @@ const LANG = {
     card4_cat:   'Landing Page',
     card5_title: 'Real Estate Launch',
     card5_cat:   'Video Production',
+    fot_comp:     'Company',
+    fot_social:  'Social',
+    webss: 'Web Development',
+    suppp:  'Support ',
+    desp:        'Digital ZN helps ambitious brands build bold digital experiences through strategy, design, development, and visual content.'
   },
 
   fr: {
@@ -120,11 +126,12 @@ const LANG = {
     hero_badge:    'Agence de Marketing Digital',
     hero_t1:       'NOUS',
     hero_tlead:    'MENONS',
-    hero_t2:       'LE FEED',
+    hero_t2:       'LE CONTENU',
     hero_sub:      'Agence créative basée au Maroc. Nous concevons, développons et filmons pour les marques qui veulent se démarquer.',
     hero_cta1:     'COMMENCER',
     reel_label:    'Showreel 2025',
     srv_label:     '02 — Services',
+    srv_label2:     'Services',
     srv_title:     'Ce Que Nous Faisons',
     srv_sub:       'Solutions digitales de bout en bout pour les marques qui osent mener.',
     srv1_name:     'Design Réseaux Sociaux',
@@ -168,12 +175,12 @@ const LANG = {
     ab_title:      'Nous Sommes Digital ZN',
     ab_body:       "Né à l'ère numérique, Digital ZN est une agence créative et de marketing digital full-service. Nous accompagnons les marques ambitieuses pour élaborer des stratégies qui tranchent et mènent la conversation. Notre équipe de stratèges, créatifs et technologues travaillent en synergie — transformant les visions en moments viraux.",
     ab_quote:      '"Notre vision est simple : mener le feed partout où nos clients sont présents."',
-    p1: 'Excellence Créative',
-    p2: 'Résultats Fondés sur les Données',
-    p3: 'Intelligence Culturelle',
-    p4: 'Rapidité de Mise en Marché',
-    p5: 'Partenariat Transparent',
-    p6: 'ROI Mesurable',
+    about_a1:      'Excellence créative',
+    about_a2:      'Résultats fondés sur les données',
+    about_a3:      'Intelligence culturelle',
+    about_a4:      'Rapidité de mise sur le marché',
+    about_a5:      'Partenariat transparent',
+    about_a6:      'Retour sur investissement mesurable',
     ct_label:      '05 — Contact',
     ct_title:      'Construisons Quelque Chose',
     ct_sub:        'Prêt à mener le feed ? Parlez-nous de votre projet.',
@@ -193,6 +200,7 @@ const LANG = {
     err_msg:       'Décrivez votre projet (au moins 10 caractères).',
     card1_title: 'Branding IA & Tech',
     card1_cat:   'Identité de Marque',
+      desp :       'تساعد Digital ZN العلامات التجارية الطموحة على بناء تجارب رقمية جريئة، وذلك من خلال الاستراتيجية والتصميم والتطوير والمحتوى البصري.',
     card2_title: 'Campagne Bière',
     card2_cat:   'Réseaux Sociaux',
     card3_title: 'UI/UX App Agricole',
@@ -201,6 +209,11 @@ const LANG = {
     card4_cat:   'Landing Page',
     card5_title: 'Lancement Immobilier',
     card5_cat:   'Production Vidéo',
+    fot_comp:    'L’entreprise',
+    fot_social:  'Social',
+    suppp:   'Support',
+    webss:  'Développement web',
+    desp: 'Digital ZN aide des marques ambitieuses à concevoir des expériences numériques audacieuses, grâce à la stratégie, au design, au développement et à la création de contenus visuels.'
   },
 
   ar: {
@@ -219,6 +232,7 @@ const LANG = {
     hero_cta1:     'ابدأ رحلتك',
     reel_label:    'شريط الأعمال 2025',
     srv_label:     '02 — الخدمات',
+    srv_label2:     'الخدمات',
     srv_title:     'ماذا نفعل',
     srv_sub:       'حلول رقمية متكاملة للعلامات التجارية الطموحة.',
     srv1_name:     'تصميم وسائل التواصل',
@@ -261,16 +275,23 @@ const LANG = {
     ab_label:      '04 — من نحن',
     ab_title:      'نحن Digital ZN',
     ab_body:       'وُلدت Digital ZN في العصر الرقمي لتكون وكالة إبداعية وتسويقية متكاملة. نتشارك مع العلامات التجارية الطموحة لصياغة استراتيجيات تخترق الضجيج وتقود الحوار. فريقنا من الاستراتيجيين والمبدعين والتقنيين يعملون بتناغم — لتحويل الرؤى إلى لحظات فيروسية.',
-    ab_quote:      '"رؤيتنا بسيطة: أن نقود الفيد أينما كان عملاؤنا حاضرين."',
+    ab_quote:      '"رؤيتنا بسيطة: أن نقود المحتوى أينما كان عملاؤنا حاضرين."',
     p1: 'التميز الإبداعي',
     p2: 'نتائج مدفوعة بالبيانات',
     p3: 'الذكاء الثقافي',
     p4: 'السرعة في الوصول للسوق',
     p5: 'شراكة شفافة',
     p6: 'عائد استثمار قابل للقياس',
+    about_a1:      'التميز الإبداعي',
+    about_a2:      'نتائج قائمة على البيانات',
+    about_a3:      'الذكاء الثقافي',
+    about_a4:      'السرعة في طرح المنتجات في الأسواق',
+    about_a5:      'شراكة تتسم بالشفافية',
+    about_a6:      'عائد على الاستثمار قابل للقياس',
+
     ct_label:      '05 — تواصل',
     ct_title:      'لنبني شيئاً عظيماً',
-    ct_sub:        'مستعد لقيادة الفيد؟ حدثنا عن مشروعك.',
+    ct_sub:        'مستعد لقيادة المحتوى؟ حدثنا عن مشروعك.',
     ct_wa:         'تحدث عبر واتساب',
     form_name:     'اسمك',
     form_email:    'بريدك الإلكتروني',
@@ -295,6 +316,11 @@ const LANG = {
     card4_cat:   'صفحة هبوط',
     card5_title: 'إطلاق العقارات',
     card5_cat:   'إنتاج الفيديو',
+    webss:       'تصميم الويب',
+    desp :       'تساعد Digital ZN العلامات التجارية الطموحة على بناء تجارب رقمية جريئة، وذلك من خلال الاستراتيجية والتصميم والتطوير والمحتوى البصري.',
+    suppp:      'للدعم',
+    fot_comp:     'الشركة',
+    fot_social:  'مواقع التواصل'
   }
 };
 /* ============================================
@@ -803,7 +829,7 @@ function initFooter() {
    SMOOTH SCROLL for anchor links
 ============================================ */
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+  document.querySelectorAll('a[href^="#"]:not(.service-dialog-link)').forEach(link => {
     link.addEventListener('click', e => {
       const target = document.querySelector(link.getAttribute('href'));
       if (!target) return;
@@ -824,7 +850,19 @@ function initServiceMorph() {
   const dialogTitle = document.getElementById('dialogTitle');
   const dialogDescription = document.getElementById('dialogDescription');
   const cards = document.querySelectorAll('.service-card');
-
+const workLink = dialog.querySelector('.service-dialog-link');
+if (workLink) {
+  workLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeDialog();
+    const target = document.querySelector(workLink.getAttribute('href'));
+    if (target) {
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    }
+  });
+}
   if (!dialog || !closeBtn || !dialogImage || !dialogNumber ||
       !dialogTitle || !dialogDescription || !cards.length) return;
 
